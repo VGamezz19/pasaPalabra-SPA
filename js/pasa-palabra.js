@@ -27,6 +27,18 @@ var questions = [
     { letter: "y", answer: "peyote", status: 0, question: ("CONTIENE LA Y. Pequeño cáctus conocido por sus alcaloides psicoactivos utilizado de forma ritual y medicinal por indígenas americanos") },
     { letter: "z", answer: "zen", status: 0, question: ("CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional") },
 ]
+
+var usuarios = [
+    {usuario: 'Pedro', ultimaPartida: '10/08/2017',correctas: 10, incorrectas: 15},
+    {usuario: 'Miguel', ultimaPartida: '16/08/2017',correctas: 23, incorrectas: 2},
+    {usuario: 'Juan', ultimaPartida: '11/08/2017',correctas: 12, incorrectas: 13},
+    {usuario: 'vGamez', ultimaPartida: '10/05/2017',correctas: 9, incorrectas: 16},
+    {usuario: 'JJperez', ultimaPartida: '10/08/2017',correctas: 24, incorrectas: 1},
+    {usuario: 'Juanjo', ultimaPartida: '12/08/2017',correctas: 3, incorrectas: 22},
+    {usuario: 'Guimenez', ultimaPartida: '10/08/2017',correctas: 20, incorrectas: 5},
+    {usuario: 'Alejandro', ultimaPartida: '13/08/2017',correctas: 5, incorrectas: 20},
+]
+
 var user = '';
 var pass = '';
 var time = 150;
@@ -145,9 +157,26 @@ function check(event) {
         alert("Se termino el pasapalabra")
     }
 }
+//================== Printar Ranking ==============//
+function printRanking() {
+    var print = ''
+    var position = 0;
+    usuarios.forEach(element => {
+        position ++;
+        print += '<li class="collection-item row">'
+        print +='<div class = "col s3">'+ position + " - " +element.usuario +'</div>'
+        print +='<div class = "col s3" style = "color:#4CAF50">' +element.correctas +'</div>'
+        print +='<div class = "col s3" style = "color:#F44336">' +element.incorrectas +'</div>'
+        print +='<div class = "col s3">' +element.ultimaPartida +'</div>'
+        print += '</li>'
+    });
+    return print
+}
 
 //================= Windows.onliad ==============//
  window.onload = function() { 
+    //  document.getElementById('modal1').modal()
+    document.getElementById('ranking').innerHTML = printRanking()
      document.onkeypress = userAndPass;
  }
 
