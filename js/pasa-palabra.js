@@ -65,7 +65,8 @@ function entra() {
         //Insertamos Letra Game
         document.getElementById('letter').innerHTML = 'A';
         document.getElementById('a').className +=' seleccionada';
-
+        //printUser
+        document.getElementById('userName').innerHTML = user
         startTime();
         document.getElementById("respuesta").focus();   
     }, 3000) 
@@ -171,6 +172,11 @@ function printRanking() {
         print += '</li>'
     });
     return print
+}
+
+function redirect () {
+    console.log("Hola que tal LOCO")
+    window.location.href = 'file:///Users/victorgamez/Desktop/_Skylap/Precurso/6.Pro_PasaPalabra++/pasa-palabra.html'
 }
 
 //================= Windows.onliad ==============//

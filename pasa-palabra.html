@@ -125,8 +125,33 @@
                 </div>
                 <!-- Game Template -->
                 <div id = 'game' style='display:none'> 
-                    <div class="row">
-                        <span class="col s12 m12 l12 right-align">Victor Gamez</span>    
+                    <div class="row" style="position:relative">
+                        <div class="fixed-action-btn horizontal contentButonUser">
+                            <a class="btn-floating waves-effect waves-light btn-large blue buttonUser">
+                                <i class="large material-icons">mode_edit</i>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a  href="#modal-terminarPartida"
+                                        data-position="left" 
+                                        data-delay="50" 
+                                        data-tooltip="Cerrar Sesion" 
+                                        class="btn-floating modal-trigger tooltipped waves-effect waves-light error ">
+                                        <i class="material-icons">close</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  href="#modal-cerrarSesion"
+                                        data-position="bottom" 
+                                        data-delay="50" 
+                                        data-tooltip="Volver a empezar"  
+                                        class="btn-floating waves-effect tooltipped waves-light modal-trigger blueC darken-1">
+                                        <i class="material-icons">rotate_right</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="col s12 m12 l12 right-align" id='userName'></span>    
                     </div>  
                     <div class="row">
                         <div class="col s12 m12 l12" style = 'min-height: 4em;'>
@@ -160,22 +185,11 @@
                     </div>    
                 </div>
             </div>
+            <!-- Ranking Template -->
             <div class="col s12 m12 l12  container rigth-content z-depth-2" style="margin-top: 1em;">
                    <h4 style = 'margin-top:0;'> Ranking <i class ="material-icons">public</i></h4> 
                    <div class = 'scroll-container'>
-                    <ul class="collection with-header ranking-ul" id='ranking'>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                        <li class="collection-item"><div>Alvin</div></li>
-                      </ul>
+                    <ul class="collection with-header ranking-ul" id='ranking'></ul>
                    </div>
                    
             </div>
@@ -194,7 +208,26 @@
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
         </div>
     </div> 
-
+    <!-- Seguro que quiere terminar la partida? -->
+    <div id="modal-terminarPartida" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" onlcik = "" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+    <!-- Seguro que quieres Cerrar sesion?-->
+    <div id="modal-cerrarSesion" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a  onclick ='redirect()' class="waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>  
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="lib/js/materialize.min.js"></script>
@@ -202,6 +235,8 @@
         $(document).ready(function(){
             // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
             $('#modal1').modal();
+            $('#modal-terminarPartida').modal();
+            $('#modal-cerrarSesion').modal();
         });
     </script>
 </body>

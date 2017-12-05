@@ -218,7 +218,15 @@ transform: rotate(615.6deg) translate(10.6875em) rotate(-615.6deg); }
     background-color: #F44336 !important;
 }
 
+.blueC {
+    background-color: #004b8d !important; 
+}
 
+.contentButonUser {
+    height: 4em !important;
+    top: 48px !important;
+    right: 41px !important;
+}
 
 
 .scoreboard {
