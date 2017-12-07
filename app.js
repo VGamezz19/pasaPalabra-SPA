@@ -10,13 +10,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-// var router = express.Router();
-//
-// router.get('/', function(req, res) {
-// res.send("Hello World!");
-// });
-//
-// app.use(router);
 
 //================MONGODB==================//
 var portAPI = process.env.PORT || 3020;
@@ -28,8 +21,17 @@ mongoose.connect('mongodb://localhost/userPasaPalabra', (err, res)=> {
         console.log ("Mongo Contectado ...")
         //==================API==================//
         //Por si acaso, primero contectamos el Servidor con MongoDB
+
+        app.use(express.static('./public'));
+
+        var router = express.Router();
+        router.get('/', (req, res) => {
+            res.redirect('/pasa-palabra.html')
+        });
+        app.use(router);
+
         app.listen(portAPI, ()=> {
-            console.log(`API-REST --> http://localhost:${portAPI}`);
+            console.log(`API-REST + Aplication --> http://localhost:${portAPI}`);
         });
     }
     
@@ -52,12 +54,12 @@ app.use('/api', routes);
 
 
 //================APLICACION==================//
-var appProject=express();
-var router = express.Router();
-var portProject = process.env.PORT || 3000;
+// var appProject=express();
+// var router = express.Router();
+// var portProject = process.env.PORT || 3000;
 
-appProject.use(express.static('./public'));
+// appProject.use(express.static('./public'));
 
-var server=appProject.listen(portProject,() =>{
-    console.log(`Aplicacion --> http://localhost:${portProject}`);
-});
+// var server=appProject.listen(portProject,() =>{
+//     console.log(`Aplicacion --> http://localhost:${portProject}`);
+// });

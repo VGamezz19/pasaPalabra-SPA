@@ -4,6 +4,20 @@ body{
    /* background-color: #2e40dbc9; */
 }
 
+.loader{
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+}
+
+.loaderHome {
+    width: 30em !important;
+    height: 30em !important;
+    position: absolute !important;
+    left: 35% !important;
+    top: 20% !important;
+}
+
 .content {
     padding: 2em;
     margin: 1em;
@@ -271,4 +285,49 @@ transform: rotate(615.6deg) translate(10.6875em) rotate(-615.6deg); }
     font-size: 2em;
     left: 50%;
     top: 29%;
+}
+
+.footerIcons{
+    position: relative;
+}
+
+.icon-twi{
+    position:absolute;
+    font-size: 3em;
+    left: 9em;
+    top: 0em;
+}
+
+.icon-li{
+    position:absolute;
+    font-size: 3em;
+    left: 7.5em;
+    top: 0em;
+}
+
+.icon-git{
+    position:absolute;
+    font-size: 3em;
+    left: 6em;
+    top: 0em;
+}
+
+.progress .indeterminate {
+    background-color: #004b8d;
+}
+
+.register-modal{
+    width: 40% !important;
+}
+
+.register-button {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    padding: 0;
+}
+
+.no-paddin-margin{
+    margin: 0 !important;
+    padding: 0 !important;
 }

@@ -29,7 +29,7 @@ exports.userInsert = (req, res) =>{
 
 	var user = new User({
         userName:       req.body.userName,
-        pass:           req.body.pass,
+        password:           req.body.password,
         correctas:      req.body.correctas,
         incorrectas:    req.body.incorrectas,
         ultimaPartida:  req.body.ultimaPartida

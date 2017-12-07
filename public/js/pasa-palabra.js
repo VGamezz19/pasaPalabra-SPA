@@ -1,3 +1,4 @@
+
 var questions = [
     { letter: "a", answer: "abducir", status: 0, question: ("CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien") },
     { letter: "b", answer: "bingo", status: 0, question: ("CON LA B. Juego que ha sacado de quicio a todos los 'Skylabers' en las sesiones de precurso") },
@@ -28,23 +29,13 @@ var questions = [
     { letter: "z", answer: "zen", status: 0, question: ("CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional") },
 ]
 
-var usuarios = [
-    {usuario: 'Pedro', ultimaPartida: '10/08/2017',correctas: 10, incorrectas: 15},
-    {usuario: 'Miguel', ultimaPartida: '16/08/2017',correctas: 23, incorrectas: 2},
-    {usuario: 'Juan', ultimaPartida: '11/08/2017',correctas: 12, incorrectas: 13},
-    {usuario: 'vGamez', ultimaPartida: '10/05/2017',correctas: 9, incorrectas: 16},
-    {usuario: 'JJperez', ultimaPartida: '10/08/2017',correctas: 24, incorrectas: 1},
-    {usuario: 'Juanjo', ultimaPartida: '12/08/2017',correctas: 3, incorrectas: 22},
-    {usuario: 'Guimenez', ultimaPartida: '10/08/2017',correctas: 20, incorrectas: 5},
-    {usuario: 'Alejandro', ultimaPartida: '13/08/2017',correctas: 5, incorrectas: 20},
-]
-
 var user = '';
 var pass = '';
 var time = 150;
 var puntos = 25;
 var eventT = false;
 var position = 0;
+let usuarios;
 
 //================= TEMPLATES ==============//
 function changeInput(){
@@ -159,20 +150,45 @@ function check(event) {
         alert("Se termino el pasapalabra")
     }
 }
+
+
+//=================== USUARIO ======================//
+function addUserNew(){
+    var user = ''
+    var pass = ''
+    console.log("DENTRO")
+    console.log(document.getElementById("user-passTwo").value)
+    console.log(document.getElementById("user-pass").value )
+    if (document.getElementById("user-passTwo").value === document.getElementById("user-pass").value) {
+        user = document.getElementById("user-register").value 
+        pass = document.getElementById("user-pass").value
+
+        newUser(user,pass);
+        console.log("Creado");
+    } else {
+        console.log("REPETIDO")
+    }
+}
 //================== Printar Ranking ==============//
+
 function printRanking() {
     var print = ''
     var position = 0;
-    usuarios.forEach(element => {
-        position ++;
-        print += '<li class="collection-item row">'
-        print +='<div class = "col s3">'+ position + " - " +element.usuario +'</div>'
-        print +='<div class = "col s3" style = "color:#4CAF50">' +element.correctas +'</div>'
-        print +='<div class = "col s3" style = "color:#F44336">' +element.incorrectas +'</div>'
-        print +='<div class = "col s3">' +element.ultimaPartida +'</div>'
-        print += '</li>'
-    });
-    return print
+   
+    setTimeout(()=>{
+        usuarios.forEach(element => {
+            position ++;
+            print += '<li class="collection-item row">'
+            print +='<div class = "col s3">'+ position + " - " +element.userName +'</div>'
+            print +='<div class = "col s3" style = "color:#4CAF50">' +element.correctas +'</div>'
+            print +='<div class = "col s3" style = "color:#F44336">' +element.incorrectas +'</div>'
+            print +='<div class = "col s3">' +element.ultimaPartida +'</div>'
+            print += '</li>'
+        });
+        document.getElementById('ranking').innerHTML = print
+        
+    },300)
+    
 }
 
 function redirect () {
@@ -182,8 +198,13 @@ function redirect () {
 //================= Windows.onliad ==============//
  window.onload = function() { 
     //  document.getElementById('modal1').modal()
-    document.getElementById('ranking').innerHTML = printRanking()
-     document.onkeypress = userAndPass;
+    getAllUser()
+    printRanking()
+    document.onkeypress = userAndPass;
+    setTimeout(()=>{
+        document.getElementById('loaderHome').style.display = 'none';
+        document.getElementById('programa').style.display = 'inline';
+    },3000)
  }
 
  //================= Window.Onload Functions ==============//
@@ -205,3 +226,37 @@ function MaysPrimera(string){
 //MODAL REGISTER
 
 //BACK END PURO...
+ //================= API FUNCTIONS ==============//
+function getAllUser() {
+    var xmlhttp = new XMLHttpRequest();
+    var myArr;
+    var url = "http://localhost:3020/api/user/";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            usuarios = JSON.parse(this.responseText);;
+            console.log(myArr)
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    return myArr
+}
+
+function newUser (user,pass) {
+    var xmlhttp = new XMLHttpRequest();
+    //var myArr;
+    var url = "http://localhost:3020/api/user/";
+    var user = user;
+    var password = pass;
+    var correctas = 0;
+    var incorrectas = 0;
+    var ultimaPartida = new Date();
+
+    xmlhttp.open("POST", url);
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.send(JSON.stringify({ userName: user, password: password, correctas : correctas, incorrectas : incorrectas}));
+}
+

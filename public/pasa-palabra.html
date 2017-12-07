@@ -23,19 +23,34 @@
     <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <script src= 'js/pasa-palabra.js'></script>
     <link rel="stylesheet" type="text/css" href="style/pasa-palabra.css">
     <title>PasaPalabra</title>
 </head>
 
 <body>    
-    <div class="col m12 l12 s12 center-align ">
-            <h1 style = 'color : black '>PASAPALABRA </h1>
+    <!-- <div class="progress loader blue" id = 'loaderHome'>
+            <div class="indeterminate"></div>
+    </div> -->
+    <div class="preloader-wrapper big active loaderHome" id = 'loaderHome'>
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+            <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+            </div><div class="circle-clipper right">
+            <div class="circle"></div>
+            </div>
         </div>
     </div>
-    <div class="row row-container">
-        <div class="col s6 m6 l6 container left-content z-depth-2">
+        
+    <div id='programa' style='display:none'>
+        <div class="col m12 l12 s12 center-align ">
+            <h1 style = 'color : black '>PASAPALABRA </h1>
+        </div>
+        <div class="row row-container">
+            <div class="col s6 m6 l6 container left-content z-depth-2">
                 <div class="circle-container col s8 m8 l8 offset-s2 offset-l2 offset-m2">
                     <div class="title-container">
                         <p class="title" id = 'letter'></p>
@@ -71,180 +86,222 @@
                         <li id="timer" class="timer" href="">150</li>
                         <li id="puntos" class="score" href="">25</li>
                     </ul>
-            </div> 
-        </div>
-        <div class="col s6 m6 l6 ">
-            <div class="text-content  col s12 m12 l12  container rigth-content z-depth-2" >
-                <!-- Welcome Template -->
-                <div id = 'content-text'>
-                    <h4> Bienbenidos a PasaPalabra!</h4>
-                    <span>
-                            Text InfoText InfoText InfoText InfoText InfoText InfoText Info
-                            Text InfoText InfoText InfoText InfoText InfoText InfoText Info
-                    </span>
-                    <div class="button">
-                            <button class="btn waves-effect boton-juega waves-light boton-juega blue-boton"
-                                type="submit"
-                                id ='juega-button'
-                                onclick="changeInput()">
-                                Juega!
-                            </button>
-                    </div>
                 </div> 
-                <!--Login Template  -->
-                <div id = 'login' style='display:none'>
-                    <div class="row" style="margin-bottom: 0;">
-                        <div id = 'input-user'class="input-field col s6">  
-                            <i class="material-icons prefix">account_circle</i>
-                            <input tabindex="1" id="insert-user" type="text" class="">
-                            <label for="icon_prefix">User Name</label>
+            </div>
+            <div class="col s6 m6 l6 ">
+                <div class="text-content  col s12 m12 l12  container rigth-content z-depth-2" >
+                    <!-- Welcome Template -->
+                    <div id = 'content-text'>
+                        <h4> Bienbenidos a PasaPalabra!</h4>
+                        <span>
+                                Text InfoText InfoText InfoText InfoText InfoText InfoText Info
+                                Text InfoText InfoText InfoText InfoText InfoText InfoText Info
+                        </span>
+                        <div class="button">
+                                <button class="btn waves-effect boton-juega waves-light boton-juega blue-boton"
+                                    type="submit"
+                                    id ='juega-button'
+                                    onclick="changeInput()">
+                                    Juega!
+                                </button>
                         </div>
-                        <div id = 'register'class="input-field col s6">
-                            <button class="btn waves-effect waves-light modal-trigger  botonRespuesta registrarse-boton blue-boton col s8"
-                                type="submit"
-                                tabindex="4"
-                                href="#modal1"
-                                name="action">Log In!
-                                <i class="material-icons prefix register-icon">add_circle</i> 
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div id = 'input-pass'class="input-field col s6">
-                            <i class="material-icons prefix">https</i>    
-                            <input tabindex="2" id="insert-pass" type="password" class="">
-                            <label for="icon_prefix">User password</label>
-                        </div>
-                    </div>
-                    <div class="button">
-                            <button class="btn waves-effect waves-light boton-juega blue-boton"
-                                type="submit"
-                                id ='master-button'
-                                onclick="entra()"
-                                disabled
-                                tabindex="3"
-                                name="action">Entrar 
-                                <i class="material-icons right">send</i>
-                            </button>
-                    </div>
-                </div>
-                <!-- Loader Template -->
-                <div id ='loader' class="preloader-wrapper big active" style = 'display:none'>
-                    <div class="spinner-layer spinner-blue-only">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                        <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                    </div>
-                </div>
-                <!-- Game Template -->
-                <div id = 'game' style='display:none'> 
-                    <div class="row" style="position:relative">
-                        <div class="fixed-action-btn horizontal contentButonUser">
-                            <a class="btn-floating waves-effect waves-light btn-large blue buttonUser">
-                                <i class="large material-icons">mode_edit</i>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a  href="#modal-cerrarSesion"
-                                        data-position="left" 
-                                        data-delay="50" 
-                                        data-tooltip="Cerrar Sesion" 
-                                        class="btn-floating modal-trigger tooltipped waves-effect waves-light error ">
-                                        <i class="material-icons">close</i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a  href="#modal-terminarPartida"
-                                        data-position="bottom" 
-                                        data-delay="50" 
-                                        data-tooltip="Volver a empezar"  
-                                        class="btn-floating waves-effect tooltipped waves-light modal-trigger blueC darken-1">
-                                        <i class="material-icons">rotate_right</i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <span class="col s12 m12 l12 right-align" id='userName'></span>    
-                    </div>  
-                    <div class="row">
-                        <div class="col s12 m12 l12" style = 'min-height: 4em;'>
-                            <span id='pregunta'>CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 m6 l6">
-                            <div class="input-field">
-                                <i class="material-icons prefix" style="margin-top: 0.6em;">format_color_text</i> 
-                                <input id="respuesta" type="text" class="">
+                    </div> 
+                    <!--Login Template  -->
+                    <div id = 'login' style='display:none'>
+                        <div class="row" style="margin-bottom: 0;">
+                            <div id = 'input-user'class="input-field col s6">  
+                                <i class="material-icons prefix">account_circle</i>
+                                <input tabindex="1" id="insert-user" type="text" class="">
+                                <label for="icon_prefix">User Name</label>
+                            </div>
+                            <div id = 'register'class="input-field col s6">
+                                <button class="btn waves-effect waves-light modal-trigger  botonRespuesta registrarse-boton blue-boton col s8"
+                                    type="submit"
+                                    tabindex="4"
+                                    href="#modal1"
+                                    name="action">Log In!
+                                    <i class="material-icons prefix register-icon">add_circle</i> 
+                                </button>
                             </div>
                         </div>
-                        <div class="col s2 m2 l2">
-                            <button class="btn waves-effect waves-light botonRespuesta  enviar-boton col s12"
-                                type="submit"
-                                onclick="next(true)"
-                                id ='enviar-respuesta'
-                                name="action">Enviar
-                            </button>
+                        <div class="row">
+                            <div id = 'input-pass'class="input-field col s6">
+                                <i class="material-icons prefix">https</i>    
+                                <input tabindex="2" id="insert-pass" type="password" class="">
+                                <label for="icon_prefix">User password</label>
+                            </div>
                         </div>
-                        <div class="col s4 m4 l4">
-                            <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
-                                type="submit"
-                                id ='pasa-palabra'
-                                onclick="next(false)"
-                                name="action">PasaPalabra
-                                <i class="material-icons right">rotate_right</i>
-                            </button>
+                        <div class="button">
+                                <button class="btn waves-effect waves-light boton-juega blue-boton"
+                                    type="submit"
+                                    id ='master-button'
+                                    onclick="entra()"
+                                    disabled
+                                    tabindex="3"
+                                    name="action">Entrar 
+                                    <i class="material-icons right">send</i>
+                                </button>
                         </div>
-                    </div>    
+                    </div>
+                    <!-- Loader Template -->
+
+                    <div class="progress loader blue" id ='loader' style="display:none">
+                        <div class="indeterminate"></div>
+                    </div> 
+                    <!-- Game Template -->
+                    <div id = 'game' style='display:none'> 
+                        <div class="row" style="position:relative">
+                            <div class="fixed-action-btn horizontal contentButonUser">
+                                <a class="btn-floating waves-effect waves-light btn-large blue buttonUser">
+                                    <i class="large material-icons">mode_edit</i>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a  href="#modal-cerrarSesion"
+                                            data-position="left" 
+                                            data-delay="50" 
+                                            data-tooltip="Cerrar Sesion" 
+                                            class="btn-floating modal-trigger tooltipped waves-effect waves-light error ">
+                                            <i class="material-icons">close</i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a  href="#modal-terminarPartida"
+                                            data-position="bottom" 
+                                            data-delay="50" 
+                                            data-tooltip="Volver a empezar"  
+                                            class="btn-floating waves-effect tooltipped waves-light modal-trigger blueC darken-1">
+                                            <i class="material-icons">rotate_right</i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span class="col s12 m12 l12 right-align" id='userName'></span>    
+                        </div>  
+                        <div class="row">
+                            <div class="col s12 m12 l12" style = 'min-height: 4em;'>
+                                <span id='pregunta'>CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 m6 l6">
+                                <div class="input-field">
+                                    <i class="material-icons prefix" style="margin-top: 0.6em;">format_color_text</i> 
+                                    <input id="respuesta" type="text" class="">
+                                </div>
+                            </div>
+                            <div class="col s2 m2 l2">
+                                <button class="btn waves-effect waves-light botonRespuesta  enviar-boton col s12"
+                                    type="submit"
+                                    onclick="next(true)"
+                                    id ='enviar-respuesta'
+                                    name="action">Enviar
+                                </button>
+                            </div>
+                            <div class="col s4 m4 l4">
+                                <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
+                                    type="submit"
+                                    id ='pasa-palabra'
+                                    onclick="next(false)"
+                                    name="action">PasaPalabra
+                                    <i class="material-icons right">rotate_right</i>
+                                </button>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+                <!-- Ranking Template -->
+                <div class="col s12 m12 l12  container rigth-content z-depth-2" style="margin-top: 1em;">
+                    <h4 style = 'margin-top:0;'> Ranking <i class ="material-icons">public</i></h4> 
+                    <div class = 'scroll-container'>
+                        <ul class="collection with-header ranking-ul" id='ranking'></ul>
+                    </div>  
                 </div>
             </div>
-            <!-- Ranking Template -->
-            <div class="col s12 m12 l12  container rigth-content z-depth-2" style="margin-top: 1em;">
-                   <h4 style = 'margin-top:0;'> Ranking <i class ="material-icons">public</i></h4> 
-                   <div class = 'scroll-container'>
-                    <ul class="collection with-header ranking-ul" id='ranking'></ul>
-                   </div>
-                   
+        </div>
+        <footer class="page-footer" style="background-color: #2c9ffaed !important;">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">From SkyLab Coders Academy</h5>
+                <p class="grey-text text-lighten-4">Academia de programacion! ver mas --> <a href="http://www.skylabcoders.com/es" style = 'color:white !important;' target="_blank">SkyLab Coders</a></p>
+              </div>
+              <div class="col l5 offset-l1 s12 footerIcons">
+                <h5 class="white-text">by Victor Gamez Royo</h5>
+                <a href="https://github.com/VGamezz19" target="_blank" style="color:white !important">
+                    <i class="fa fa-github icon-git" aria-hidden="true" ></i>
+                </a>
+                <a href="https://twitter.com/VictorGamez1596" target="_blank" style="color:white !important">
+                    <i class="fa fa-twitter icon-twi" aria-hidden="true" ></i>
+                </a> 
+                <a href="https://www.linkedin.com/in/victor-gamez/" target="_blank" style="color:white !important">
+                    <i class="fa fa-linkedin icon-li" aria-hidden="true" ></i>
+                </a>  
+              </div>
+            </div>
+            </div>
+        </footer>
+
+        <!-- MODALS -->
+        <!-- REGISTER -->
+        <div id="modal1" class="modal register-modal">
+            <div class="modal-content" style="padding-bottom: 0em;">
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">account_circle</i>    
+                        <input tabindex="4" id="user-register" class="">
+                        <label for="icon_prefix">nick name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">https</i>    
+                        <input tabindex="4" id="user-pass" type="password" class="">
+                        <label for="icon_prefix">password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <i class="material-icons prefix">https</i>    
+                        <input tabindex="4" id="user-passTwo" type="password" class="">
+                        <label for="icon_prefix">repite password</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer no-paddin-margin" >
+                <button class="btn col s12 register-button no-paddin-margin waves-effect waves-light blue-boton"
+                    type="submit"
+                    onclick="addUserNew()"
+                    tabindex="5"
+                    name="action">Registrate! 
+                    <i class="material-icons right"></i>
+                </button>
+            </div>
+        </div> 
+        <!-- Seguro que quiere terminar la partida? -->
+        <div id="modal-terminarPartida" class="modal">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" onlcik = "" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
-        
+        <!-- Seguro que quieres Cerrar sesion?-->
+        <div id="modal-cerrarSesion" class="modal">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+            </div>
+            <div class="modal-footer">
+                <a  onclick ='redirect()' class="waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- MODALS -->
-    <!-- REGISTER -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-    </div> 
-    <!-- Seguro que quiere terminar la partida? -->
-    <div id="modal-terminarPartida" class="modal">
-        <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" onlcik = "" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-    </div>
-    <!-- Seguro que quieres Cerrar sesion?-->
-    <div id="modal-cerrarSesion" class="modal">
-        <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-            <a  onclick ='redirect()' class="waves-effect waves-green btn-flat">Agree</a>
-        </div>
-    </div>  
+      
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="lib/js/materialize.min.js"></script>
