@@ -1,23 +1,22 @@
 {
-  "name": "pasapalabra",
+  "name": "api",
   "version": "1.0.0",
-  "description": "PasaPalabra From SkyLab",
-  "main": "index.js",
-  "dependencies": {
-    "express": "^4.16.2"
-  },
-  "devDependencies": {},
+  "description": "API for PasaPalabra",
+  "main": "app.js",
   "scripts": {
+    "start" : "nodemon app.js", //npm i -S nodemon 
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VGamezz19/skylabPasaPalabra.git"
   },
   "author": "Victor Gamez",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/VGamezz19/skylabPasaPalabra/issues"
+  "dependencies": {
+    "body-parser": "^1.5.1",
+    "express": "^4.7.1",
+    "method-override": "^2.1.2",
+    "mongoose": "~3.6.11",
+    "nodemon": "^1.12.5"
   },
-  "homepage": "https://github.com/VGamezz19/skylabPasaPalabra#readme"
+  "devDependencies": {
+    "nodemon": "^1.12.5"
+  }
 }
