@@ -3,14 +3,13 @@ const User = require('../models/user');
 
 //GET - ALL USERS
 exports.allUsers = (req, res) => {
-	// User.find((err, users) => {
-    //     if(err) res.send(500, err.message);
+	User.find((err, users) => {
+        if(err) res.send(500, err.message);
 
-    //     console.log('GET /allUsers')
+        console.log('GET /allUsers')
 
-	// 	res.status(200).jsonp(users);
-    // });
-    res.send({mensaje:`hola Mundo`});
+		res.status(200).jsonp(users);
+    });
 };
 
 //GET - User by ID 
