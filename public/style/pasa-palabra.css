@@ -349,3 +349,10 @@ transform: rotate(615.6deg) translate(10.6875em) rotate(-615.6deg); }
     left: 92%;
 }
 
+.content-fin {
+    min-height: 3em;
+    position: relative;
+    margin-top: 3em;
+    margin-bottom: 0;
+}
+

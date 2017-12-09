@@ -46,9 +46,9 @@ var routes = express.Router();
 
 routes.route('/user')
      .get(User.allUsers)
-     .post(User.userInsert);
+     .post(User.userInsert)
+     .put(User.userUpdate);
 routes.route('/user/:id')
-     .put(User.userUpdate)
      .delete(User.userDelete);
 routes.route('/user/login').post(User.userByID)
 

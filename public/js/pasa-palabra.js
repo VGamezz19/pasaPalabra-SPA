@@ -1,4 +1,3 @@
-
 var questions = [
     { letter: "a", answer: "abducir", status: 0, question: ("CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien") },
     { letter: "b", answer: "bingo", status: 0, question: ("CON LA B. Juego que ha sacado de quicio a todos los 'Skylabers' en las sesiones de precurso") },
@@ -56,17 +55,18 @@ function startGame(){
         document.getElementById("respuesta").focus();   
     }, 3000) 
     // Restar Segundos 
-    function startTime(){
-        setTimeout(() => {
-            time --;
-            document.getElementById("timer").innerHTML = time
-            time !== 0 ? startTime() : console.log()
-           // console.log("Done", time)
-            time === 0 ? check(true) : console.log()      
-        },1000)
-    }
+    
  } 
-
+ //===================Start Time =============//
+ function startTime(){
+    setTimeout(() => {
+        time --;
+        document.getElementById("timer").innerHTML = time
+        time !== 0 ? startTime() : console.log()
+       // console.log("Done", time)
+        time === 0 ? check(true) : console.log()      
+    },1000)
+}
 //========================== Next Letra =======================//
 function next(event){
     var letter = questions[position].letter;
@@ -119,7 +119,6 @@ function next(event){
         document.getElementById(questions[position].letter).className +=' seleccionada';
         document.getElementById("respuesta").focus();
  }
-
 //================== Fin de Roscon ==============//
 function check(event) {
     if(!event){ //Si esta dentro de tiempo
@@ -140,19 +139,48 @@ function check(event) {
 }
 //================== Fin de Juego ==============//
 function finGame(event){
+    var correctas = 0
+    var incorrectas = 0
     if(event){
-        var correctas = 0
-        var incorrectas = 0
         questions.forEach(element => {
             element.status === 1 ? correctas++ : incorrectas ++;
         });
-        console.log(correctas, incorrectas)
-    }else {
-
+    }else { //Fuera de teimpo
+        questions.forEach(element => {
+            if(element.status === 1){
+                correctas ++
+            } else { //Las no respuestas tambien incorrectas
+                incorrectas ++
+            }
+        });
     }
+    finTemplateGame(correctas,incorrectas)
+}
+//================== Repetir pasa palabra ==============//
+function repetirPasaPalabra(){
+    // loaderHome();
+    // document.getElementById("timer").innerHTML = 150
+    // document.getElementById("puntos").innerHTML = 25;
+    // position = 0;
+    // addCirculo();
+    // setTimeout(()=>{startTime()},3000)
 }
 //================= TEMPLATES =====================//
-//================== Printar Ranking ==============//
+//================== Pintar Circulo ==============//
+function loaderHome(){
+    setTimeout(()=>{
+        document.getElementById('loaderHome').style.display = 'none';
+        document.getElementById('programa').style.display = 'inline';
+    },3000)
+}
+function addCirculo(){
+    var print =''
+    questions.forEach(element => {
+        print += "<li class='item' id= '"+element.letter+"'>"+element.letter.toUpperCase()+"</li>"
+    });
+    document.getElementById('ciculo').innerHTML = print;
+}
+//================== Pintar Ranking ==============//
 function printRanking(usuarios) {
     var print = ''
     var position = 0;
@@ -190,18 +218,27 @@ function toast(text,icon,time){
     //SHOW POP UP
     Materialize.toast($toastContent, time);
 }
+//================= Template Final Game ==============//
+function finTemplateGame(correctas, incorrectas) {
+    var date = new Date()
+    date = date.getDate() + "/" + date.getMonth() + "/" +date.getFullYear()
+
+    document.getElementById('game').style.display = 'none'
+    document.getElementById('fin-game').style.display = 'inline'
+    document.getElementById('user-fin').innerHTML = user
+    document.getElementById('correctas-fin').innerHTML = correctas
+    document.getElementById('incorrectas-fin').innerHTML = incorrectas
+    document.getElementById('date-fin').innerHTML = date
+}
 
 //================= Windows.onload ==============//
 //================== FIRST LOAD PAGE ============//
 window.onload = () => { 
-    //  document.getElementById('modal1').modal()
+    addCirculo()
     getAllUser()
     document.onkeypress = userAndPass;
+    loaderHome()
     
-    setTimeout(()=>{
-        document.getElementById('loaderHome').style.display = 'none';
-        document.getElementById('programa').style.display = 'inline';
-    },3000)
  }
 
  //================= User and Pass =======================//
@@ -252,9 +289,7 @@ function getAllUser() {
     var url = "http://localhost:3020/api/user/";
 
     xmlhttp.onreadystatechange = function() {
-        console.log("hola2")
         if (this.readyState == 4 && this.status == 200) {
-            console.log("hola")
             usuarios = JSON.parse(this.responseText);
             printRanking(usuarios)
         }
@@ -273,7 +308,6 @@ function newUser (user,pass) {
     var correctas = 0;
     var incorrectas = 0;
     var ultimaPartida = new Date();
-    console.log(ultimaPartida)
 
     xmlhttp.open("POST", url , true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -322,7 +356,7 @@ function logInUser (user,pass) {
                 document.getElementById('label-user').classList.remove('active')
                 document.getElementById('label-pass').classList.remove('active')
     
-                toast('<span>Usuario o Contraseña <b>Incorrect@</b></span>','rror_outline',4000)
+                toast('<span>Usuario o Contraseña <b>Incorrect@</b></span>','error_outline',4000)
                 document.getElementById('user-register').focus()
     
             }else {
@@ -344,3 +378,21 @@ function logInUser (user,pass) {
 }
 
 //=================== Update User ===============//
+function updateUser () {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://localhost:3020/api/user/";
+    var correctas = parseInt(document.getElementById('correctas-fin').innerText)
+    var incorrectas = parseInt(document.getElementById('incorrectas-fin').innerText)
+    console.log(user)
+    xmlhttp.open("PUT", url , true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
+        if(this.readyState == 4 && this.status == 200) {
+            getAllUser()
+            return true
+        } else {
+            return false
+        }
+    }
+    xmlhttp.send(JSON.stringify({ userName: user, correctas: correctas, incorrectas:incorrectas}));
+}

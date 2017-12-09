@@ -58,7 +58,7 @@ exports.userInsert = (req, res) =>{
 	user.password = params.password
 	user.ultimaPartida = new Date().getTime();
     user.role = 'role_user';
-	User.findOne({ userName: user.userName.toLowerCase() }, (err, userMongo) => {
+	User.findOne({ userName: user.userName }, (err, userMongo) => {
 			if (err) {
 				res.status(500).send({message: false})
 			}else {
@@ -91,12 +91,13 @@ exports.userInsert = (req, res) =>{
 
 //PUT - Update User
 exports.userUpdate = (req, res) => {
-    var id = req.params.id
-	User.findById(id, (err, userUpdate) => {
+	var user= req.body.userName.toLowerCase();
+	console.log(req.body)
+	User.findOne({ userName: user }, (err, userUpdate) => {
 
         userUpdate.correctas = req.body.correctas;
         userUpdate.incorrectas = req.body.incorrectas;
-        userUpdate.ultimaPartida = req.body.ultimaPartida;         
+        userUpdate.ultimaPartida = new Date().getTime();        
 
 		userUpdate.save((err) =>{
 			if(err) return res.status(500).send(err.message);

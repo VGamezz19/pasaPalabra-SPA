@@ -55,32 +55,8 @@
                     <div class="title-container">
                         <p class="title" id = 'letter'></p>
                     </div>
-                    <ul class="circle">
-                        <li class="item" id= 'a'>A</li>
-                        <li class="item" id ='b'>B</li>
-                        <li class="item" id ='c'>C</li>
-                        <li class="item" id ='d'>D</li>
-                        <li class="item" id ='e'>E</li>
-                        <li class="item" id ='f'>F</li>
-                        <li class="item" id ='g'>G</li>
-                        <li class="item" id ='h'>H</li>
-                        <li class="item" id ='i'>I</li>
-                        <li class="item" id ='j'>J</li>
-                        <li class="item" id ='l'>L</li>
-                        <li class="item" id ='m'>M</li>
-                        <li class="item" id ='n'>N</li>
-                        <li class="item" id ='ñ'>Ñ</li>
-                        <li class="item" id ='o'>O</li>
-                        <li class="item" id ='p'>P</li>
-                        <li class="item" id ='q'>Q</li>
-                        <li class="item" id ='r'>R</li>
-                        <li class="item" id ='s'>S</li>
-                        <li class="item" id ='t'>T</li>
-                        <li class="item" id ='u'>U</li>
-                        <li class="item" id ='v'>V</li>
-                        <li class="item" id ='x'>X</li>
-                        <li class="item" id ='y'>Y</li>
-                        <li class="item" id ='z'>Z</li>
+                    <ul class="circle" id ='ciculo'>
+                        
                     </ul>
                     <ul class="scoreboard">
                         <li id="timer" class="timer" href="">150</li>
@@ -210,9 +186,70 @@
                             </div>
                         </div>    
                     </div>
-                    <!-- Fin Game -->
-                    <div id = 'fin-game' style='display:none'> 
 
+                    <!-- Fin Game -->
+                    <div id = 'fin-game' style='display:none'>    
+                        <h4>Fin de del juego</h4>
+                        <div class="row content-fin">
+                            <div class="fixed-action-btn horizontal contentButonUser">
+                                <a class="btn-floating waves-effect waves-light btn-large blue buttonUser">
+                                    <i class="large material-icons">mode_edit</i>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a  href="#modal-cerrarSesion"
+                                            data-position="left" 
+                                            data-delay="50" 
+                                            data-tooltip="Cerrar Sesion" 
+                                            class="btn-floating modal-trigger tooltipped waves-effect waves-light error ">
+                                            <i class="material-icons">close</i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a  href="#modal-terminarPartida"
+                                            data-position="bottom" 
+                                            data-delay="50" 
+                                            data-tooltip="Volver a empezar" 
+                                            onclick="repetirPasaPalabra()" 
+                                            class="btn-floating waves-effect tooltipped waves-light modal-trigger blueC darken-1">
+                                            <i class="material-icons">rotate_right</i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col s3">
+                                <span id='user-fin'>vgamez</span>
+                            </div>
+                            <div class="col s3">
+                                <span style = "color:#4CAF50" id='correctas-fin'>6</span>
+                            </div>
+                            <div class="col s3">
+                                <span style = "color:#F44336" id='incorrectas-fin'>19</span>
+                            </div>
+                            <div class="col s3">
+                                <span id='date-fin'>09/12/2017</span>                                             
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 m6 l6">
+                                    <button class="btn waves-effect waves-light botonRespuesta  enviar-boton col s12"
+                                    type="submit"
+                                    onclick="updateUser()"
+                                    id ='añadir-ranking'
+                                    name="action">Añadir al Ranking
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                            <div class="col s6 m6 l6">
+                                    <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
+                                    type="submit"
+                                    id =''
+                                    onclick="repetirPasaPalabra()"
+                                    name="action">Repetir Pasapalabra
+                                    <i class="material-icons right">rotate_right</i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Ranking Template -->
