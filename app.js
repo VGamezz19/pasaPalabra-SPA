@@ -26,7 +26,9 @@ mongoose.connect('mongodb://localhost/userPasaPalabra', (err, res)=> {
 
         var router = express.Router();
         router.get('/', (req, res) => {
-            res.redirect('/pasa-palabra.html')
+            //app.use(express.static('./public'));
+           res.redirect('/pasa-palabra.html')
+           //res.send('')
         });
         app.use(router);
 
@@ -46,9 +48,9 @@ routes.route('/user')
      .get(User.allUsers)
      .post(User.userInsert);
 routes.route('/user/:id')
-     .get(User.userByID)
      .put(User.userUpdate)
      .delete(User.userDelete);
+routes.route('/user/login').post(User.userByID)
 
 app.use('/api', routes);
 

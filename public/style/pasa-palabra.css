@@ -236,6 +236,7 @@ transform: rotate(615.6deg) translate(10.6875em) rotate(-615.6deg); }
     background-color: #004b8d !important; 
 }
 
+
 .contentButonUser {
     height: 4em !important;
     top: 48px !important;
@@ -331,3 +332,20 @@ transform: rotate(615.6deg) translate(10.6875em) rotate(-615.6deg); }
     margin: 0 !important;
     padding: 0 !important;
 }
+
+.modal .modal-footer {
+    border-radius: 0 0 2px 2px;
+    background-color: #fafafa;
+    padding: 4px 6px;
+    height: 52px;
+    width: 100%;
+    text-align: right;
+}
+
+.icon-modal{
+    position: absolute;
+    color: black;
+    top: 5%;
+    left: 92%;
+}
+

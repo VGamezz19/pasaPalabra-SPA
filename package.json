@@ -4,12 +4,13 @@
   "description": "API for PasaPalabra",
   "main": "app.js",
   "scripts": {
-    "start" : "nodemon app.js", //npm i -S nodemon 
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Victor Gamez",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.5.1",
     "express": "^4.7.1",
     "method-override": "^2.1.2",

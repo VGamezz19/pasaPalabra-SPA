@@ -1,44 +1,97 @@
 var mongoose = require('mongoose');
 const User = require('../models/user');
+const bcrypt = require('bcrypt-nodejs');
 
 //GET - ALL USERS
 exports.allUsers = (req, res) => {
-	User.find((err, users) => {
-        if(err) res.send(500, err.message);
-
-        console.log('GET /allUsers')
-
+	//Find All User SORT DESC correctas
+	User.find({}).sort({correctas: -1}).exec( (err, users) => {
+		if(err) res.send(500, err.message);
 		res.status(200).jsonp(users);
-    });
+	})
 };
 
-//GET - User by ID 
+//GET - User by ID v
 exports.userByID  = (req, res)=> {
-	User.findById(req.params.id, (err, userId) => {
-    if(err) return res.send(500, err.message);
+	let params = req.body;
+	
+		let userNameCout = params.userName;
+		let password = params.password;
+	
+		User.findOne({ userName: userNameCout.toLowerCase() }, (err, user) => {
+			if (err) {
+				res.status(500).send({message: false})
+			}else {
+				if (!user) {
+					res.status(404).send({ message:false})
+				}else {              
+					// check if the password is the same of our database
+					bcrypt.compare(password, user.password, (err, check)=>{
+						// if the passwords is valid
+						if (check) {
+							// if the param gethash is send in request we generate the token
+							if (params.gethash) {
+								res.status(200).send({ token: jwt.createToken(user) });
+							}else {
+								// if the gethash is not set we return a user information
+								res.status(200).send({ user });
+							}
+						}else { // If password not match
+							res.status(404).send({message: false});
+						}
+					});
+				}
+			}
+		})
+	// User.findById(req.params.id, (err, userId) => {
+    // if(err) return res.send(500, err.message);
 
-    console.log('GET /usuario/' + req.params.id);
-		res.status(200).jsonp(userId);
-    });
+    // console.log('GET /usuario/' + req.params.id);
+	// 	res.status(200).jsonp(userId);
+    // });
 };
 
 //POST - Inser New User
 exports.userInsert = (req, res) =>{
-	console.log('POST');
-	console.log(req.body);
+	let user = new User(); // instanciamos el objeto user con el modelo correspondiente
+    
+    let params = req.body; // recogemos todas las variables que nos lleguen por post
 
-	var user = new User({
-        userName:       req.body.userName,
-        password:           req.body.password,
-        correctas:      req.body.correctas,
-        incorrectas:    req.body.incorrectas,
-        ultimaPartida:  req.body.ultimaPartida
-	});
+    user.userName = params.userName.toLowerCase();
+    user.correctas = params.correctas;
+	user.incorrectas = params.incorrectas;
+	user.password = params.password
+	user.ultimaPartida = new Date().getTime();
+    user.role = 'role_user';
+	User.findOne({ userName: user.userName.toLowerCase() }, (err, userMongo) => {
+			if (err) {
+				res.status(500).send({message: false})
+			}else {
+				if (!userMongo) { //Si no encuentra Usuario... Insertar
+					if( params.password ) { //Con Contraseña.
+						bcrypt.hash(params.password, null, null, function (err, hash) {
+							user.password = hash;
+							if( user.userName !== null) {
+								user.save( (err, userStored) => {
+									if (err) {
+										res.status(500).send({message: 'Request Error'});
+									}else {
+										if ( !userStored ) {
+											res.status(404).send({message: 'The user is void'});
+										}else {
+											res.status(200).send({ message: true });
+										}
+									}
+								})
+							}
+						})
+					}
+				}else { // Si Encuentra Usuario... Error        
+					res.send({message:false})
+				}
+			}
+		})
 
-	user.save((err, user) => {
-		if(err) return res.status(500).send( err.message);
-    res.status(200).jsonp(user);
-	});
 };
 
 //PUT - Update User
