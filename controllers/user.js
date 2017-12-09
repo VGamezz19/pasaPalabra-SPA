@@ -17,13 +17,14 @@ exports.userByID  = (req, res)=> {
 	
 		let userNameCout = params.userName;
 		let password = params.password;
-	
+		console.log(params)
 		User.findOne({ userName: userNameCout.toLowerCase() }, (err, user) => {
 			if (err) {
 				res.status(500).send({message: false})
 			}else {
+				console.log("mongo -->", user);
 				if (!user) {
-					res.status(404).send({ message:false})
+					res.send({ message:false})
 				}else {              
 					// check if the password is the same of our database
 					bcrypt.compare(password, user.password, (err, check)=>{
@@ -37,18 +38,12 @@ exports.userByID  = (req, res)=> {
 								res.status(200).send({ user });
 							}
 						}else { // If password not match
-							res.status(404).send({message: false});
+							res.send({message: false});
 						}
 					});
 				}
 			}
 		})
-	// User.findById(req.params.id, (err, userId) => {
-    // if(err) return res.send(500, err.message);
-
-    // console.log('GET /usuario/' + req.params.id);
-	// 	res.status(200).jsonp(userId);
-    // });
 };
 
 //POST - Inser New User

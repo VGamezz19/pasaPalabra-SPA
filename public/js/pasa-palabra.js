@@ -35,25 +35,39 @@ var time = 150;
 var puntos = 25;
 var eventT = false;
 var position = 0;
+var statusCheck = false
+var count = 0;
 var usuarios;
 var respons;
 var newuserError;
 
+//===================GAME =============//
+//===================Start Game =============//
+function startGame(){
+    setTimeout(()=>{
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('game').style.display = 'inline';
+        //Insertamos Letra Game
+        document.getElementById('letter').innerHTML = 'A';
+        document.getElementById('a').className +=' seleccionada';
+        //printUser
+        document.getElementById('userName').innerHTML = user
+        startTime();
+        document.getElementById("respuesta").focus();   
+    }, 3000) 
+    // Restar Segundos 
+    function startTime(){
+        setTimeout(() => {
+            time --;
+            document.getElementById("timer").innerHTML = time
+            time !== 0 ? startTime() : console.log()
+           // console.log("Done", time)
+            time === 0 ? check(true) : console.log()      
+        },1000)
+    }
+ } 
 
-//================= TEMPLATES ==============//
-function changeInput(){
-    document.getElementById("content-text").style.display = 'none'
-    document.getElementById('login').style.display = 'inline'
-    //document.getElementById('insert-user').focus()
-    userAndPass()
-}
-
-function entra() {
-    
-}
-
-//================= Game ==============//
-var count = 0;
+//========================== Next Letra =======================//
 function next(event){
     var letter = questions[position].letter;
     var status = questions[position].status;
@@ -63,11 +77,7 @@ function next(event){
             if(respuesta !== document.getElementById("respuesta").value.toLowerCase()) {
                 //Marcamos Error
                 document.getElementById(letter).className += " error";
-                //PopUP Content HTML
-                $toastContent = $('<i class="material-icons prefix popUp" style = "color:red">error_outline</i>')
-                                .add($('<span> La Palabra Correcta Es <b>'+ MaysPrimera(respuesta) +'</b></span>'));
-                //SHOW POP UP
-                Materialize.toast($toastContent, 4000);
+                toast('La Palabra Correcta Es <b>' + respuesta.charAt(0).toUpperCase() + respuesta.slice(1),'error_outline',4000)
                 //El status anterior
                 questions[position].status = 2;
             } else {
@@ -85,7 +95,6 @@ function next(event){
          else if(!eventT){
              document.getElementById("respuesta").focus();     
          }
-
         //Buscar la proxima POSICION
         var BreakException = {}; 
         try {
@@ -120,108 +129,31 @@ function check(event) {
                 count ++;
             }
         });
-        console.log(count, "Entra?", questions.length)
         if(count === 25){
-            alert("fin")
+            statusCheck = true
+            finGame(true)
         }
-    } else { //Si se termina el tiempo
+    } else if (!statusCheck){ //Si se termina el tiempo
         alert("Se termino el pasapalabra")
+        finGame(false)
     }
 }
+//================== Fin de Juego ==============//
+function finGame(event){
+    if(event){
+        var correctas = 0
+        var incorrectas = 0
+        questions.forEach(element => {
+            element.status === 1 ? correctas++ : incorrectas ++;
+        });
+        console.log(correctas, incorrectas)
+    }else {
 
-
-//=================== USUARIO ======================//
-function addUserNew(){
-    var user = ''
-    var pass = ''
-
-    console.log(document.getElementById("user-passTwo").value)
-    console.log(document.getElementById("user-pass").value )
-    if (document.getElementById("user-passTwo").value === document.getElementById("user-pass").value) {
-
-       user = document.getElementById("user-register").value 
-       pass = document.getElementById("user-pass").value
-       newUser(user,pass);
-        setTimeout(()=>{
-            if(newuserError.message === false){ //El usuario esta REPETIDO!
-                document.getElementById("user-pass").value = ''
-                document.getElementById("user-passTwo").value = ''
-                document.getElementById("user-register").value = ''
-
-                $toastContent = $('<i class="material-icons prefix popUp" style = "color:red">account_circle</i>')
-                .add($('<span>El usuario ya <b>Existe!</b></span>'));
-                Materialize.toast($toastContent, 4000);
-            } else {
-                $('#modal1').modal('close');
-                document.getElementById('insert-user').focus()
-            }
-        },300)
-
-    } else {
-        document.getElementById("user-pass").value = ''
-        document.getElementById("user-passTwo").value = ''
-        document.getElementById("user-register").value = ''
-        document.getElementById("user-register").focus()
-        $toastContent = $('<i class="material-icons prefix popUp" style = "color:red">https</i>')
-        .add($('<span>Las contraseñas no <b>Coinciden</b></span>'));
-        
-        Materialize.toast($toastContent, 4000);
     }
 }
-
-function loginUsuario(){
-    user = document.getElementById('insert-user').value;
-    password = document.getElementById('insert-pass').value;
-    console.log(user,password)
-    logInUser(user,password);
-    setTimeout(()=>{
-        if(!respons){
-            document.getElementById('insert-user').value = ''
-            document.getElementById('insert-pass').value = ''
-            document.getElementById('label-user').classList.remove('active')
-            document.getElementById('label-pass').classList.remove('active')
-
-            $toastContent = $('<i class="material-icons prefix popUp" style = "color:red">error_outline</i>')
-            .add($('<span>Usuario o Contraseña <b>Incorrect@</b></span>'));
-            
-            Materialize.toast($toastContent, 4000);
-
-            document.getElementById('master-button').blur();
-
-        }else {
-            user = respons.user.userName;
-            //Ejecutamos Logica Game
-            document.getElementById("login").style.display = 'none'
-            document.getElementById('loader').style.display = 'inline-block'
-            //A los 3 se ejecuta el juego
-            setTimeout(function(){
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('game').style.display = 'inline';
-                //Insertamos Letra Game
-                document.getElementById('letter').innerHTML = 'A';
-                document.getElementById('a').className +=' seleccionada';
-                //printUser
-                document.getElementById('userName').innerHTML = user
-                startTime();
-                document.getElementById("respuesta").focus();   
-            }, 3000) 
-            // Restar Segundos 
-            function startTime(){
-                setTimeout(() => {
-                    time --;
-                    document.getElementById("timer").innerHTML = time
-                    time !== 0 ? startTime() : console.log()
-                   // console.log("Done", time)
-                    time === 0 ? check(true) : console.log()      
-                },1000)
-            }
-        }
-    },500)
-    
-}
+//================= TEMPLATES =====================//
 //================== Printar Ranking ==============//
-
-function printRanking() {
+function printRanking(usuarios) {
     var print = ''
     var position = 0;
 
@@ -243,17 +175,27 @@ function printRanking() {
         
     },300) 
 }
-
-
-function redirect () {
-    location.reload();
+//================= Template Log IN ==============//
+function changeInput(){
+    document.getElementById("content-text").style.display = 'none'
+    document.getElementById('login').style.display = 'inline'
+    //document.getElementById('insert-user').focus()
+    userAndPass()
+}
+//================= Toast Template ==============//
+function toast(text,icon,time){
+    //PopUP Content HTML
+    $toastContent = $('<i class="material-icons prefix popUp" style = "color:red">'+icon+'</i>')
+    .add($('<span>'+ text +'</span>'));
+    //SHOW POP UP
+    Materialize.toast($toastContent, time);
 }
 
-//================= Windows.onliad ==============//
- window.onload = function() { 
+//================= Windows.onload ==============//
+//================== FIRST LOAD PAGE ============//
+window.onload = () => { 
     //  document.getElementById('modal1').modal()
     getAllUser()
-    printRanking()
     document.onkeypress = userAndPass;
     
     setTimeout(()=>{
@@ -262,8 +204,7 @@ function redirect () {
     },3000)
  }
 
- //================= Window.Onload Functions ==============//
- // 1 _ User and Pass ??
+ //================= User and Pass =======================//
 function userAndPass() {
     if(document.getElementById("insert-user").value && document.getElementById("insert-pass").value) {
         document.getElementById("master-button").removeAttribute('disabled')
@@ -271,31 +212,58 @@ function userAndPass() {
         document.getElementById("master-button").setAttribute('disabled','disabled')
     }
 }
-//La primera en Mayuscula
-function MaysPrimera(string){
-    return string.charAt(0).toUpperCase() + string.slice(1);
+
+//===================  Gestion USUARIO ======================//
+//=================== Sing In ============= //
+function addUserNew(){
+    var user = ''
+    var pass = ''
+
+    if (document.getElementById("user-passTwo").value === document.getElementById("user-pass").value) {
+       user = document.getElementById("user-register").value 
+       pass = document.getElementById("user-pass").value
+       newUser(user,pass);
+
+    } else {
+        document.getElementById("user-pass").value = ''
+        document.getElementById("user-passTwo").value = ''
+        document.getElementById("user-register").value = ''
+        document.getElementById("user-register").focus()
+        toast('<span>Las contraseñas no <b>Coinciden</b></span>','https',4000)
+    }
 }
 
+//=================== Log In ============= //
+function loginUsuario(){
+    user = document.getElementById('insert-user').value;
+    password = document.getElementById('insert-pass').value;
+    logInUser(user,password);   
+}
 
-//TERMINAR LOGI DE FIN DE PARTIDA
-//MODAL REGISTER
+//=================== Log Off ============= //
+function logOff () {
+    location.reload();
+}
 
-//BACK END PURO...
  //================= API FUNCTIONS ==============//
+ //================= ALL USERS =================//
 function getAllUser() {
     var xmlhttp = new XMLHttpRequest();
     var url = "http://localhost:3020/api/user/";
 
     xmlhttp.onreadystatechange = function() {
+        console.log("hola2")
         if (this.readyState == 4 && this.status == 200) {
-            console.log(JSON.parse(this.responseText));
+            console.log("hola")
             usuarios = JSON.parse(this.responseText);
+            printRanking(usuarios)
         }
     };
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
 
+//===================== Inser new User ==========//
 function newUser (user,pass) {
     var xmlhttp = new XMLHttpRequest();
     //var myArr;
@@ -311,7 +279,21 @@ function newUser (user,pass) {
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
         if(this.readyState == 4 && this.status == 200) {
-            newuserError = JSON.parse(this.responseText);
+            newuserError = JSON.parse(this.responseText)
+
+            if(newuserError.message === false){ //El usuario esta REPETIDO!
+                document.getElementById("user-pass").value = ''
+                document.getElementById("user-passTwo").value = ''
+                document.getElementById("user-register").value = ''
+
+                toast('<span>El usuario ya <b>Existe!</b></span>','account_circle',4000)
+                document.getElementById('user-register').focus()
+                
+            } else {
+                $('#modal1').modal('close');
+                document.getElementById('insert-user').focus()
+            }
+
             return true
         } else {
             return false
@@ -320,6 +302,7 @@ function newUser (user,pass) {
     xmlhttp.send(JSON.stringify({ userName: user, password: password, correctas : correctas, incorrectas : incorrectas}));
 }
 
+//====================== Log In User ==================//
 function logInUser (user,pass) {
     var xmlhttp = new XMLHttpRequest();
     var url = "http://localhost:3020/api/user/login";
@@ -327,12 +310,30 @@ function logInUser (user,pass) {
     var password = pass;
     console.log("Entra", user, password)
 
-    
     xmlhttp.open("POST", url , true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
         if(this.readyState == 4 && this.status == 200) {
             respons = JSON.parse(this.responseText);
+            console.log(respons)
+            if(respons.message === false){
+                document.getElementById('insert-user').value = ''
+                document.getElementById('insert-pass').value = ''
+                document.getElementById('label-user').classList.remove('active')
+                document.getElementById('label-pass').classList.remove('active')
+    
+                toast('<span>Usuario o Contraseña <b>Incorrect@</b></span>','rror_outline',4000)
+                document.getElementById('user-register').focus()
+    
+            }else {
+                user = respons.user.userName;
+                //Ejecutamos Logica Game
+                document.getElementById("login").style.display = 'none'
+                document.getElementById('loader').style.display = 'inline-block'
+                //A los 3 se ejecuta el juego
+                startGame()
+            }
+            
             return true
         } else {
             respons = false
@@ -340,6 +341,6 @@ function logInUser (user,pass) {
         }
     }
     xmlhttp.send(JSON.stringify({ userName: user, password: password}));
-
 }
 
+//=================== Update User ===============//
