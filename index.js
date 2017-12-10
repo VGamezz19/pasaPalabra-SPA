@@ -4,28 +4,39 @@ var express         = require("express"),
     methodOverride  = require("method-override");
     http            = require("http"),
     server          = http.createServer(app),
-    mongoose        = require('mongoose');
-    
+    mongoose        = require('mongoose'),
+    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+ var connection = require('./env/' + process.env.NODE_ENV + '.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
+
+
 //================MONGODB==================//
-var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra'
+//var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra'
 var PORT = process.env.PORT || 5000
 var path = require('path')
 var engines = require('consolidate')
 
-mongoose.connect(mongoPort, (err, res)=> {
+console.log("entra", process.env.MONGODB_URI)
+console.log(connection)
+mongoose.connect(connection.db, (err, res)=> {
     useMongoClient: true;
+    console.log("entra2", process.env.MONGODB_URI)
     if(err) {
         console.log('ERROR: connecting to Database... --> ' + err);
     }else {
-        console.log ("Mongo Contectado ..." + mongoPort)
+        console.log("entra3", process.env.MONGODB_URI)
+        console.log ("Mongo Contectado ..." )
     }
     
 });
+
+require('./models/user')
+require('./models/preguntas')
 //==================API + Aplicacion==================//
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -54,7 +65,6 @@ app.route('/api/user/login').post(User.userByID)
 app.route('/api/preguntas')
      .get(Questions.allQuestions)
      .post(Questions.newQuestion)
-console.log(app.route)
 //app.use('/api', routes);
 
 //console.log(reoutes)
