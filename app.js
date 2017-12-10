@@ -14,7 +14,7 @@ app.use(methodOverride());
 
 // ,"nodemon": "^1.12.5"
 //================MONGODB==================//
-console.log(process.env.PORT)
+console.log(process.env)
 app.set('port', (process.env.PORT || 8000));
 var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra' 
 
