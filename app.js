@@ -14,7 +14,7 @@ app.use(methodOverride());
 
 //================MONGODB==================//
 console.log(process.env)
-var portAPI = process.env.PORT || 3020;
+var portAPI = process.env.PORT || 5000
 var mongoPort = process.env.MONGODB_URI 
 
 mongoose.connect(mongoPort, (err, res)=> {
