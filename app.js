@@ -26,7 +26,6 @@ mongoose.connect('mongodb://localhost/userPasaPalabra', (err, res)=> {
 
         var router = express.Router();
         router.get('/', (req, res) => {
-            //app.use(express.static('./public'));
            res.redirect('/pasa-palabra.html')
            //res.send('')
         });
@@ -40,6 +39,7 @@ mongoose.connect('mongodb://localhost/userPasaPalabra', (err, res)=> {
 });
 //================== RUTAS API ==================//
 var User = require('./controllers/user');
+var Questions = require('./controllers/preguntas');
 
 // API routes
 var routes = express.Router();
@@ -51,6 +51,10 @@ routes.route('/user')
 routes.route('/user/:id')
      .delete(User.userDelete);
 routes.route('/user/login').post(User.userByID)
+
+routes.route('/preguntas')
+     .get(Questions.allQuestions)
+     .post(Questions.newQuestion)
 
 app.use('/api', routes);
 

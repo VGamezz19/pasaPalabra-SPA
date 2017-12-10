@@ -1,33 +1,31 @@
-var questions = [
-    { letter: "a", answer: "abducir", status: 0, question: ("CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien") },
-    { letter: "b", answer: "bingo", status: 0, question: ("CON LA B. Juego que ha sacado de quicio a todos los 'Skylabers' en las sesiones de precurso") },
-    { letter: "c", answer: "churumbel", status: 0, question: ("CON LA C. Niño, crío, bebé") },
-    { letter: "d", answer: "diarrea", status: 0, question: ("CON LA D. Anormalidad en la función del aparato digestivo caracterizada por frecuentes evacuaciones y su consistencia líquida") },
-    { letter: "e", answer: "ectoplasma", status: 0, question: ("CON LA E. Gelatinoso y se encuentra debajo de la membrana plasmática. Los cazafantasmas medían su radiación") },
-    { letter: "f", answer: "facil", status: 0, question: ("CON LA F. Que no requiere gran esfuerzo, capacidad o dificultad") },
-    { letter: "g", answer: "galaxia", status: 0, question: ("CON LA G. Conjunto enorme de estrellas, polvo interestelar, gases y partículas") },
-    { letter: "h", answer: "harakiri", status: 0, question: ("CON LA H. Suicidio ritual japonés por desentrañamiento") },
-    { letter: "i", answer: "iglesia", status: 0, question: ("CON LA I. Templo cristiano") },
-    { letter: "j", answer: "jabali", status: 0, question: ("CON LA J. Variedad salvaje del cerdo que sale en la película 'El Rey León', de nombre Pumba") },
-    //{ letter: "k", answer: "kamikaze", status: 0, question: ("CON LA K. Persona que se juega la vida realizando una acción temeraria") },
-    { letter: "l", answer: "licantropo", status: 0, question: ("CON LA L. Hombre lobo") },
-    { letter: "m", answer: "misantropo", status: 0, question: ("CON LA M. Persona que huye del trato con otras personas o siente gran aversión hacia ellas") },
-    { letter: "n", answer: "necedad", status: 0, question: ("CON LA N. Demostración de poca inteligencia") },
-    { letter: "ñ", answer: "señal", status: 0, question: ("CONTIENE LA Ñ. Indicio que permite deducir algo de lo que no se tiene un conocimiento directo.") },
-    { letter: "o", answer: "orco", status: 0, question: ("CON LA O. Humanoide fantástico de apariencia terrible y bestial, piel de color verde creada por el escritor Tolkien") },
-    { letter: "p", answer: "protoss", status: 0, question: ("CON LA P. Raza ancestral tecnológicamente avanzada que se caracteriza por sus grandes poderes psíonicos del videojuego StarCraft") },
-    { letter: "q", answer: "queso", status: 0, question: ("CON LA Q. Producto obtenido por la maduración de la cuajada de la leche") },
-    { letter: "r", answer: "raton", status: 0, question: ("CON LA R. Roedor") },
-    { letter: "s", answer: "stackoverflow", status: 0, question: ("CON LA S. Comunidad salvadora de todo desarrollador informático") },
-    { letter: "t", answer: "terminator", status: 0, question: ("CON LA T. Película del director James Cameron que consolidó a Arnold Schwarzenegger como actor en 1984") },
-    { letter: "u", answer: "unamuno", status: 0, question: ("CON LA U. Escritor y filósofo español de la generación del 98 autor del libro 'Niebla' en 1914") },
-    { letter: "v", answer: "vikingos", status: 0, question: ("CON LA V. Nombre dado a los miembros de los pueblos nórdicos originarios de Escandinavia, famosos por sus incursiones y pillajes en Europa") },
-    //{ letter: "w", answer: "sandwich", status: 0, question: ("CONTIENE LA W. Emparedado hecho con dos rebanadas de pan entre las cuales se coloca jamón y queso") },
-    { letter: "x", answer: "botox", status: 0, question: ("CONTIENE LA X. Toxina bacteriana utilizada en cirujía estética") },
-    { letter: "y", answer: "peyote", status: 0, question: ("CONTIENE LA Y. Pequeño cáctus conocido por sus alcaloides psicoactivos utilizado de forma ritual y medicinal por indígenas americanos") },
-    { letter: "z", answer: "zen", status: 0, question: ("CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional") },
-]
-
+var questions =[]
+//  [
+//     { letter: "a", answer: "abducir", status: 0, question: "CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien" },
+//     { letter: "b", answer: "bingo", status: 0, question: "CON LA B. Juego que ha sacado de quicio a todos los 'Skylabers' en las sesiones de precurso" },
+//     { letter: "c", answer: "churumbel", status: 0, question: "CON LA C. Niño, crío, bebé" },
+//     { letter: "d", answer: "diarrea", status: 0, question: "CON LA D. Anormalidad en la función del aparato digestivo caracterizada por frecuentes evacuaciones y su consistencia líquida" },
+//     { letter: "e", answer: "ectoplasma", status: 0, question: "CON LA E. Gelatinoso y se encuentra debajo de la membrana plasmática. Los cazafantasmas medían su radiación" },
+//     { letter: "f", answer: "facil", status: 0, question: "CON LA F. Que no requiere gran esfuerzo, capacidad o dificultad" },
+//     { letter: "g", answer: "galaxia", status: 0, question: "CON LA G. Conjunto enorme de estrellas, polvo interestelar, gases y partículas" },
+//     { letter: "h", answer: "harakiri", status: 0, question: "CON LA H. Suicidio ritual japonés por desentrañamiento" },
+//     { letter: "i", answer: "iglesia", status: 0, question: "CON LA I. Templo cristiano" },
+//     { letter: "j", answer: "jabali", status: 0, question: "CON LA J. Variedad salvaje del cerdo que sale en la película 'El Rey León', de nombre Pumba" },
+//     { letter: "l", answer: "licantropo", status: 0, question: "CON LA L. Hombre lobo" },
+//     { letter: "m", answer: "misantropo", status: 0, question: "CON LA M. Persona que huye del trato con otras personas o siente gran aversión hacia ellas" },
+//     { letter: "n", answer: "necedad", status: 0, question: "CON LA N. Demostración de poca inteligencia" },
+//     { letter: "ñ", answer: "señal", status: 0, question: "CONTIENE LA Ñ. Indicio que permite deducir algo de lo que no se tiene un conocimiento directo." },
+//     { letter: "o", answer: "orco", status: 0, question: "CON LA O. Humanoide fantástico de apariencia terrible y bestial, piel de color verde creada por el escritor Tolkien" },
+//     { letter: "p", answer: "protoss", status: 0, question: "CON LA P. Raza ancestral tecnológicamente avanzada que se caracteriza por sus grandes poderes psíonicos del videojuego StarCraft" },
+//     { letter: "q", answer: "queso", status: 0, question: "CON LA Q. Producto obtenido por la maduración de la cuajada de la leche" },
+//     { letter: "r", answer: "raton", status: 0, question: "CON LA R. Roedor" },
+//     { letter: "s", answer: "stackoverflow", status: 0, question:"CON LA S. Comunidad salvadora de todo desarrollador informático" },
+//     { letter: "t", answer: "terminator", status: 0, question: "CON LA T. Película del director James Cameron que consolidó a Arnold Schwarzenegger como actor en 1984" },
+//     { letter: "u", answer: "unamuno", status: 0, question: "CON LA U. Escritor y filósofo español de la generación del 98 autor del libro 'Niebla' en 1914" },
+//     { letter: "v", answer: "vikingos", status: 0, question: "CON LA V. Nombre dado a los miembros de los pueblos nórdicos originarios de Escandinavia, famosos por sus incursiones y pillajes en Europa" },
+//     { letter: "x", answer: "botox", status: 0, question: "CONTIENE LA X. Toxina bacteriana utilizada en cirujía estética" },
+//     { letter: "y", answer: "peyote", status: 0, question: "CONTIENE LA Y. Pequeño cáctus conocido por sus alcaloides psicoactivos utilizado de forma ritual y medicinal por indígenas americanos" },
+//     { letter: "z", answer: "zen", status: 0, question: "CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional" }
+// ]
 var user = '';
 var password = ''
 var time = 150;
@@ -39,6 +37,7 @@ var count = 0;
 var usuarios;
 var respons;
 var newuserError;
+var statusTime = false
 
 //===================GAME =============//
 //===================Start Game =============//
@@ -54,17 +53,19 @@ function startGame(){
         startTime();
         document.getElementById("respuesta").focus();   
     }, 3000) 
-    // Restar Segundos 
-    
+    // Restar Segundos  
  } 
  //===================Start Time =============//
  function startTime(){
     setTimeout(() => {
-        time --;
-        document.getElementById("timer").innerHTML = time
-        time !== 0 ? startTime() : console.log()
-       // console.log("Done", time)
-        time === 0 ? check(true) : console.log()      
+        if(!statusTime){
+            time --;
+            document.getElementById("timer").innerHTML = time
+            time !== 0 ? startTime() : console.log()
+           // console.log("Done", time)
+            time === 0 ? check(true) : console.log()  
+        } 
+           
     },1000)
 }
 //========================== Next Letra =======================//
@@ -72,7 +73,6 @@ function next(event){
     var letter = questions[position].letter;
     var status = questions[position].status;
     var respuesta = questions[position].answer;
-
         if(event){
             if(respuesta !== document.getElementById("respuesta").value.toLowerCase()) {
                 //Marcamos Error
@@ -90,7 +90,6 @@ function next(event){
                 //El status anterior
                 questions[position].status = 1
             }
-
          } //PasaPalabra
          else if(!eventT){
              document.getElementById("respuesta").focus();     
@@ -133,7 +132,6 @@ function check(event) {
             finGame(true)
         }
     } else if (!statusCheck){ //Si se termina el tiempo
-        alert("Se termino el pasapalabra")
         finGame(false)
     }
 }
@@ -141,6 +139,7 @@ function check(event) {
 function finGame(event){
     var correctas = 0
     var incorrectas = 0
+    statusTime = true
     if(event){
         questions.forEach(element => {
             element.status === 1 ? correctas++ : incorrectas ++;
@@ -157,13 +156,24 @@ function finGame(event){
     finTemplateGame(correctas,incorrectas)
 }
 //================== Repetir pasa palabra ==============//
-function repetirPasaPalabra(){
-    // loaderHome();
-    // document.getElementById("timer").innerHTML = 150
-    // document.getElementById("puntos").innerHTML = 25;
-    // position = 0;
-    // addCirculo();
-    // setTimeout(()=>{startTime()},3000)
+function repetirPasaPalabra(element){
+    getAllPreguntas();
+    element === true ? $('#modal-terminarPartida').modal('close') : console.log();
+    document.getElementById('loaderHome').style.display = 'inline';
+    document.getElementById('programa').style.display = 'none';
+    loaderHome();
+    document.getElementById("timer").innerHTML = 153
+    time = 153;
+    statusTime = false
+    startTime();
+    document.getElementById("puntos").innerHTML = 25;
+    position = 0;
+    
+    document.getElementById("pregunta").innerHTML = questions[position].question
+    document.getElementById('letter').innerHTML = questions[position].letter.toUpperCase();
+    document.getElementById('a').className +=' seleccionada';
+    document.getElementById('game').style.display = 'inline'
+    document.getElementById('fin-game').style.display = 'none'
 }
 //================= TEMPLATES =====================//
 //================== Pintar Circulo ==============//
@@ -234,13 +244,12 @@ function finTemplateGame(correctas, incorrectas) {
 //================= Windows.onload ==============//
 //================== FIRST LOAD PAGE ============//
 window.onload = () => { 
-    addCirculo()
     getAllUser()
     document.onkeypress = userAndPass;
     loaderHome()
+    getAllPreguntas()
     
  }
-
  //================= User and Pass =======================//
 function userAndPass() {
     if(document.getElementById("insert-user").value && document.getElementById("insert-pass").value) {
@@ -249,7 +258,6 @@ function userAndPass() {
         document.getElementById("master-button").setAttribute('disabled','disabled')
     }
 }
-
 //===================  Gestion USUARIO ======================//
 //=================== Sing In ============= //
 function addUserNew(){
@@ -269,19 +277,16 @@ function addUserNew(){
         toast('<span>Las contraseñas no <b>Coinciden</b></span>','https',4000)
     }
 }
-
 //=================== Log In ============= //
 function loginUsuario(){
     user = document.getElementById('insert-user').value;
     password = document.getElementById('insert-pass').value;
     logInUser(user,password);   
 }
-
 //=================== Log Off ============= //
 function logOff () {
     location.reload();
 }
-
  //================= API FUNCTIONS ==============//
  //================= ALL USERS =================//
 function getAllUser() {
@@ -297,7 +302,6 @@ function getAllUser() {
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
-
 //===================== Inser new User ==========//
 function newUser (user,pass) {
     var xmlhttp = new XMLHttpRequest();
@@ -314,20 +318,17 @@ function newUser (user,pass) {
     xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
         if(this.readyState == 4 && this.status == 200) {
             newuserError = JSON.parse(this.responseText)
-
             if(newuserError.message === false){ //El usuario esta REPETIDO!
                 document.getElementById("user-pass").value = ''
                 document.getElementById("user-passTwo").value = ''
                 document.getElementById("user-register").value = ''
 
                 toast('<span>El usuario ya <b>Existe!</b></span>','account_circle',4000)
-                document.getElementById('user-register').focus()
-                
+                document.getElementById('user-register').focus()    
             } else {
                 $('#modal1').modal('close');
                 document.getElementById('insert-user').focus()
             }
-
             return true
         } else {
             return false
@@ -342,7 +343,6 @@ function logInUser (user,pass) {
     var url = "http://localhost:3020/api/user/login";
     var user = user;
     var password = pass;
-    console.log("Entra", user, password)
 
     xmlhttp.open("POST", url , true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -358,7 +358,6 @@ function logInUser (user,pass) {
     
                 toast('<span>Usuario o Contraseña <b>Incorrect@</b></span>','error_outline',4000)
                 document.getElementById('user-register').focus()
-    
             }else {
                 user = respons.user.userName;
                 //Ejecutamos Logica Game
@@ -367,7 +366,6 @@ function logInUser (user,pass) {
                 //A los 3 se ejecuta el juego
                 startGame()
             }
-            
             return true
         } else {
             respons = false
@@ -383,7 +381,7 @@ function updateUser () {
     var url = "http://localhost:3020/api/user/";
     var correctas = parseInt(document.getElementById('correctas-fin').innerText)
     var incorrectas = parseInt(document.getElementById('incorrectas-fin').innerText)
-    console.log(user)
+
     xmlhttp.open("PUT", url , true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
@@ -395,4 +393,28 @@ function updateUser () {
         }
     }
     xmlhttp.send(JSON.stringify({ userName: user, correctas: correctas, incorrectas:incorrectas}));
+}
+
+//=================== get All Preguntas ===============//
+function getAllPreguntas() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://localhost:3020/api/preguntas/";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log( JSON.parse(this.responseText))
+            // var xdxd = []
+            // var numero = 0
+            questions = JSON.parse(this.responseText)
+            // console.log(xdxd )
+            // xdxd.forEach(element => {
+            //     console.log(element)
+            // });
+            addCirculo()
+            
+        }
+
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
 }

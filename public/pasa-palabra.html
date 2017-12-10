@@ -210,7 +210,6 @@
                                             data-position="bottom" 
                                             data-delay="50" 
                                             data-tooltip="Volver a empezar" 
-                                            onclick="repetirPasaPalabra()" 
                                             class="btn-floating waves-effect tooltipped waves-light modal-trigger blueC darken-1">
                                             <i class="material-icons">rotate_right</i>
                                         </a>
@@ -241,7 +240,7 @@
                                 </button>
                             </div>
                             <div class="col s6 m6 l6">
-                                    <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
+                                <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
                                     type="submit"
                                     id =''
                                     onclick="repetirPasaPalabra()"
@@ -302,7 +301,13 @@
                 <p>A bunch of text</p>
             </div>
             <div class="modal-footer">
-                <a href="#!" onlcik = "" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
+                    type="submit"
+                    id =''
+                    onclick="repetirPasaPalabra(true)"
+                    name="action">Repetir Pasapalabra
+                    <i class="material-icons right">rotate_right</i>
+                </button>
             </div>
         </div>
         <!-- Seguro que quieres Cerrar sesion?-->
