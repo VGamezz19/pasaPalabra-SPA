@@ -5,6 +5,7 @@ var express         = require("express"),
     http            = require("http"),
     server          = http.createServer(app),
     mongoose        = require('mongoose');
+    const path = require('path')
     
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,7 +15,7 @@ app.use(methodOverride());
 
 //================MONGODB==================//
 app.set('port', (process.env.PORT || 5000));
-var mongoPort = process.env.MONGODB_URI || 'localhost/pasaPalabra' 
+var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra' 
 
 mongoose.connect(mongoPort, (err, res)=> {
     useMongoClient: true;
@@ -24,8 +25,8 @@ mongoose.connect(mongoPort, (err, res)=> {
         console.log ("Mongo Contectado ..." + mongoPort)
         //==================API==================//
         //Por si acaso, primero contectamos el Servidor con MongoDB
-
-        app.use(express.static('./public'));
+        app.use(express.static(path.join(__dirname, 'public')))
+        //app.use(express.static('./public'));
 
         var router = express.Router();
         router.get('/', (req, res) => {
@@ -34,7 +35,7 @@ mongoose.connect(mongoPort, (err, res)=> {
         app.use(router);
 
         app.listen(app.get('port'), () => {
-            console.log(`you are listening at port ${port}`);
+            console.log(`you are listening at port ${app.get('port')}`);
         });
     }
     
