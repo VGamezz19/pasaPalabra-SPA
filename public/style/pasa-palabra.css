@@ -380,4 +380,9 @@ transform: rotate(615.6deg) translate(10.6875em) rotate(-615.6deg); }
     flex: 1 0 auto;
     background-color: #44acff !important;
 }
-
+.icon-sky {
+    width: 3em;
+    position: absolute;
+    right: 6em;
+    top: 0em;
+}
