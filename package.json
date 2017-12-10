@@ -1,25 +1,39 @@
 {
-  "name": "api",
-  "version": "1.0.0",
-  "description": "API for PasaPalabra",
+  "name": "Pasa-Palabra",
+  "version": "0.1.0",
+  "description": "Proyecto final Pre-curso SKYLAB",
   "engines": {
     "node": "8.9.1"
   },
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon index.js",
+    "start": "node index.js",
+    "test": "node test.js"
   },
-  "author": "Victor Gamez",
-  "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.5.1",
-    "express": "^4.7.1",
+    "consolidate": "^0.15.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
     "method-override": "^2.1.2",
-    "mongoose": "~3.6.11"
+    "mongoose": "~3.6.11",
+    "mustache": "^2.3.0"
   },
   "devDependencies": {
-    "nodemon": "^1.12.5"
-  }
+    "request": "^2.81.0",
+    "nodemon": "^1.12.5",
+    "tape": "^4.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VGamezz19/skylabPasaPalabra"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }

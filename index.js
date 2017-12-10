@@ -5,18 +5,17 @@ var express         = require("express"),
     http            = require("http"),
     server          = http.createServer(app),
     mongoose        = require('mongoose');
-    const path = require('path')
     
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-// ,"nodemon": "^1.12.5"
 //================MONGODB==================//
-console.log(process.env)
-app.set('port', (process.env.PORT || 8000));
-var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra' 
+var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra'
+var PORT = process.env.PORT || 5000
+var path = require('path')
+var engines = require('consolidate')
 
 mongoose.connect(mongoPort, (err, res)=> {
     useMongoClient: true;
@@ -24,24 +23,19 @@ mongoose.connect(mongoPort, (err, res)=> {
         console.log('ERROR: connecting to Database... --> ' + err);
     }else {
         console.log ("Mongo Contectado ..." + mongoPort)
-        //==================API==================//
-        //Por si acaso, primero contectamos el Servidor con MongoDB
-       // app.use(express.static(path.join(__dirname, 'public')))
-        // app.use('/', express.static(__dirname + '/public'));
-        // //app.use(express.static('./public'));
-
-        // //var router = express.Router();
-        // app.get('/', (req, res) => {
-        //     res.sendFile('public/pasa-palabra.html', { root: __dirname });
-        // });
-       // app.use(router);
-
-        app.listen(app.get('port'), () => {
-            console.log(`you are listening at port ${app.get('port')}`);
-        });
     }
     
 });
+//==================API + Aplicacion==================//
+
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', __dirname + '/view');
+app.engine('ejs', engines.mustache);
+app.set('view engine', 'ejs');
+app.get('/', (req, res) => res.render('pasa-palabra'))
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+
 //================== RUTAS API ==================//
 var User = require('./controllers/user');
 var Questions = require('./controllers/preguntas');
