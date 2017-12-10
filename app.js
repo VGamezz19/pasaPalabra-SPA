@@ -13,7 +13,7 @@ app.use(methodOverride());
 
 
 //================MONGODB==================//
-console.log(process.env)
+const port = process.env.PORT || 4000;
 var mongoPort = process.env.MONGODB_URI || 'localhost/pasaPalabra' 
 
 mongoose.connect(mongoPort, (err, res)=> {
@@ -33,8 +33,8 @@ mongoose.connect(mongoPort, (err, res)=> {
         });
         app.use(router);
 
-        app.listen(process.env.PORT || 5000, ()=> {
-            console.log(`API-REST + Aplication --> http://localhost:${process.env.PORT || 5000}`);
+        app.listen(port, () => {
+            console.log(`you are listening at port ${port}`);
         });
     }
     
