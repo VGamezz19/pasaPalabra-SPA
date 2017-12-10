@@ -24,16 +24,7 @@ var engines = require('consolidate')
 
 console.log("entra", process.env.MONGODB_URI)
 console.log(connection)
-mongoose.connect(connection.db, (err, res)=> {
-    console.log("entra2", process.env.MONGODB_URI)
-    if(err) {
-        console.log('ERROR: connecting to Database... --> ' + err);
-    }else {
-        console.log("entra3", process.env.MONGODB_URI)
-        console.log ("Mongo Contectado ..." )
-    }
-    
-});
+mongoose.connect(connection.db);
 require('./models/user')
 require('./models/preguntas')
 
