@@ -165,7 +165,7 @@ function repetirPasaPalabra(element){
     document.getElementById("timer").innerHTML = 153
     time = 153;
     statusTime = false
-    startTime();
+    startTime(); 
     document.getElementById("puntos").innerHTML = 25;
     position = 0;
     
