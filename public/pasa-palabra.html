@@ -29,7 +29,7 @@
     <title>PasaPalabra</title>
 </head>
 
-<body >    
+<body  id ='body'>
     <!-- Loader Init PAGE -->
     <div class="preloader-wrapper big active loaderHome" id = 'loaderHome'>
         <div class="spinner-layer spinner-blue-only">
@@ -47,7 +47,7 @@
       <!-- All HTML content -->
     <div id='programa' style='display:none'>
         <div class="col m12 l12 s12 center-align ">
-            <h1 style = 'color : black '>PASAPALABRA </h1>
+            <h1 class = 'titulo-pasa'>PASAPALABRA </h1>
         </div>
         <div class="row row-container">
             <div class="col s6 m6 l6 container left-content z-depth-2">
@@ -320,33 +320,8 @@
                 <a  onclick ='logOff()' class="waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
-        <!-- Footer -->
-        <footer class="page-footer" style="background-color: #2c9ffaed !important;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col l6 s12">
-                            <h5 class="white-text">From SkyLab Coders Academy</h5>
-                            <p class="grey-text text-lighten-4">Academia de programacion! ver mas --> <a tabindex="0" href="http://www.skylabcoders.com/es" style = 'color:white !important;' target="_blank">SkyLab Coders</a></p>
-                        </div>
-                        <div class="col l5 offset-l1 s12 footerIcons">
-                            <h5 class="white-text">by Victor Gamez Royo</h5>
-                            <a tabindex="0" href="https://github.com/VGamezz19" target="_blank" style="color:white !important">
-                                <i class="fa fa-github icon-git" aria-hidden="true" ></i>
-                            </a>
-                            <a tabindex="0" href="https://twitter.com/VictorGamez1596" target="_blank" style="color:white !important">
-                                <i class="fa fa-twitter icon-twi" aria-hidden="true" ></i>
-                            </a> 
-                            <a tabindex="0" href="https://www.linkedin.com/in/victor-gamez/" target="_blank" style="color:white !important">
-                                <i class="fa fa-linkedin icon-li" aria-hidden="true" ></i>
-                            </a>  
-                        </div>
-                    </div>
-                </div>
-            </footer>
     </div>
 
-
-      
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="lib/js/materialize.min.js"></script>
@@ -359,4 +334,27 @@
         });
     </script>
 </body>
+<!-- Footer -->
+<footer id = 'footer' class="page-footer footer-row" style="display:none">
+        <div class="container" style="background: rgba(0, 0, 0, 0)">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">From SkyLab Coders Academy</h5>
+                    <p class="grey-text text-lighten-4">Academia de programacion! ver mas --> <a tabindex="0" href="http://www.skylabcoders.com/es" style = 'color:white !important;' target="_blank">SkyLab Coders</a></p>
+                </div>
+                <div class="col l5 offset-l1 s12 footerIcons">
+                    <h5 class="white-text">by Victor Gamez Royo</h5>
+                    <a tabindex="0" href="https://github.com/VGamezz19" target="_blank" style="color:white !important">
+                        <i class="fa fa-github icon-git" aria-hidden="true" ></i>
+                    </a>
+                    <a tabindex="0" href="https://twitter.com/VictorGamez1596" target="_blank" style="color:white !important">
+                        <i class="fa fa-twitter icon-twi" aria-hidden="true" ></i>
+                    </a> 
+                    <a tabindex="0" href="https://www.linkedin.com/in/victor-gamez/" target="_blank" style="color:white !important">
+                        <i class="fa fa-linkedin icon-li" aria-hidden="true" ></i>
+                    </a>  
+                </div>
+            </div>
+        </div>
+    </footer>
 </html>

@@ -1,7 +1,24 @@
-body{
-
+.background{
     width: 100%;
-   /* background-color: #2e40dbc9; */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+@media (min-width: 1480px) {
+    .background {
+        background: repeating-linear-gradient(33.3333333333333333333deg,#66D9C7 -45em, #66D9C7 0em,rgba(0, 0, 0, 0) 0px,rgba(0, 0, 0, 0) 37em) !important; 
+    } 
+ }
+ @media (max-width: 1479px) {
+    .background {
+        background: repeating-linear-gradient(33.3333333333333333333deg,#66D9C7 -32em, #66D9C7 0em,rgba(0, 0, 0, 0) 0em,rgba(0, 0, 0, 0) 35em) !important; 
+    }
+ }
+
+.titulo-pasa {
+    color: #004b8d;
+    text-align: left;
+    margin-left: 2.7em;
 }
 
 .loader{
@@ -36,6 +53,7 @@ body{
     top : 80%;
 }
 .container {
+    background: white;
     padding: 1em !important;
 }
 /* Login */
@@ -135,6 +153,8 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     position: relative;
     padding-top: 2em;
     width: 100%; 
+    margin-left: 14.666667% !important;
+    margin-top: 1em !important;
 }
   
 .circle {
@@ -354,5 +374,10 @@ transform: rotate(615.6deg) translate(10.6875em) rotate(-615.6deg); }
     position: relative;
     margin-top: 3em;
     margin-bottom: 0;
+}
+
+.footer-row {
+    flex: 1 0 auto;
+    background-color: #44acff !important;
 }
 
