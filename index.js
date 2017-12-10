@@ -41,22 +41,23 @@ var User = require('./controllers/user');
 var Questions = require('./controllers/preguntas');
 
 // API routes
-var routes = express.Router();
+// var routes = express.Router();
 
-routes.route('/user')
+app.route('/api/user')
      .get(User.allUsers)
      .post(User.userInsert)
      .put(User.userUpdate);
-routes.route('/user/:id')
+app.route('/api/user/:id')
      .delete(User.userDelete);
-routes.route('/user/login').post(User.userByID)
+app.route('/api/user/login').post(User.userByID)
 
-routes.route('/preguntas')
+app.route('/api/preguntas')
      .get(Questions.allQuestions)
      .post(Questions.newQuestion)
+console.log(app.route)
+//app.use('/api', routes);
 
-app.use('/api', routes);
-
+//console.log(reoutes)
 
 //================APLICACION==================//
 // var appProject=express();
