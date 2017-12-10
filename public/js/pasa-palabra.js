@@ -268,7 +268,7 @@ function logOff () {
  //================= ALL USERS =================//
 function getAllUser() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3020/api/user/";
+    var url = "api/user/";
 
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -283,7 +283,7 @@ function getAllUser() {
 function newUser (user,pass) {
     var xmlhttp = new XMLHttpRequest();
     //var myArr;
-    var url = "http://localhost:3020/api/user/";
+    var url = "api/user/";
     var user = user;
     var password = pass;
     var correctas = 0;
@@ -317,13 +317,14 @@ function newUser (user,pass) {
 //====================== Log In User ==================//
 function logInUser (user,pass) {
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3020/api/user/login";
+    var url = "api/user/login";
     var user = user;
     var password = pass;
 
     xmlhttp.open("POST", url , true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
+        console.log("ejecuta", this.status, this.readyState)
         if(this.readyState == 4 && this.status == 200) {
             respons = JSON.parse(this.responseText);
             console.log(respons)
@@ -355,7 +356,7 @@ function logInUser (user,pass) {
 //=================== Update User ===============//
 function updateUser () {
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3020/api/user/";
+    var url = "api/user/";
     var correctas = parseInt(document.getElementById('correctas-fin').innerText)
     var incorrectas = parseInt(document.getElementById('incorrectas-fin').innerText)
 
@@ -375,7 +376,7 @@ function updateUser () {
 //=================== get All Preguntas ===============//
 function getAllPreguntas() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3020/api/preguntas/";
+    var url = "api/preguntas/";
 
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

@@ -5,6 +5,7 @@ var express         = require("express"),
     http            = require("http"),
     server          = http.createServer(app),
     mongoose        = require('mongoose');
+    
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -13,7 +14,8 @@ app.use(methodOverride());
 
 //================MONGODB==================//
 var portAPI = process.env.PORT || 3020;
-mongoose.connect('mongodb://localhost/userPasaPalabra', (err, res)=> {
+var mongoPort = process.env.MONGOLAB_URI || 'mongodb://localhost/userPasaPalabra'
+mongoose.connect(mongoPort, (err, res)=> {
     useMongoClient: true;
     if(err) {
         console.log('ERROR: connecting to Database... --> ' + err);
@@ -26,8 +28,7 @@ mongoose.connect('mongodb://localhost/userPasaPalabra', (err, res)=> {
 
         var router = express.Router();
         router.get('/', (req, res) => {
-           res.redirect('/pasa-palabra.html')
-           //res.send('')
+            res.sendFile('public/pasa-palabra.html', { root: __dirname });
         });
         app.use(router);
 
