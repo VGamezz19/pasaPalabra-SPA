@@ -3,14 +3,7 @@
 var mongoose = require('mongoose');
 var Pregunta = require('../models/preguntas');
 exports.allQuestions = (req, res, next) => {
-//     Pregunta.find({}, (err,preguntas) => {
-//         console.log(preguntas)
-//     if(err) {
-//       return next(err);
-//     } else {
-//       res.status(200).jsonp(preguntas);
-//     }
-//   });
+
     Pregunta.find({}, function (err, preguntas) {
             console.log(preguntas)
             if(err) {
@@ -42,5 +35,5 @@ exports.newQuestion = (req, res, next) => {
             }
         }
     })
-                    sta
+                    
 };
