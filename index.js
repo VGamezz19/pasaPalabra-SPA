@@ -30,7 +30,7 @@ require('./models/user')
 require('./models/preguntas')
 
 // Since this is an example, we'll clean up after ourselves.
-mongoose.connection.db.collection('songs').drop(function (err) {
+mongoose.connection.db.collection('preguntaspasapalabras').drop(function (err) {
 if(err) throw err;
     // Only close the connection when your app is terminating
     mongoose.connection.db.close(function (err) {
