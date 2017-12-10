@@ -26,12 +26,14 @@ exports.newQuestion = (req, res, next) => {
     
     pregunta.save( (err, question) => {
         if (err) {
-            res.status(500).send({message: 'Request Error'});
+            next(err);
         }else {
             if ( !question ) {
                 res.status(404).send({message: 'The user is void'});
+                next();
             }else {
                 res.status(200).send({ message: true });
+                next();
             }
         }
     })
