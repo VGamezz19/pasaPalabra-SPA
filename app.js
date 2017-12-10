@@ -27,13 +27,13 @@ mongoose.connect(mongoPort, (err, res)=> {
         //==================API==================//
         //Por si acaso, primero contectamos el Servidor con MongoDB
        // app.use(express.static(path.join(__dirname, 'public')))
-        app.use('/', express.static(__dirname + '/public'));
-        //app.use(express.static('./public'));
+        // app.use('/', express.static(__dirname + '/public'));
+        // //app.use(express.static('./public'));
 
-        //var router = express.Router();
-        app.get('/', (req, res) => {
-            res.sendFile('public/pasa-palabra.html', { root: __dirname });
-        });
+        // //var router = express.Router();
+        // app.get('/', (req, res) => {
+        //     res.sendFile('public/pasa-palabra.html', { root: __dirname });
+        // });
        // app.use(router);
 
         app.listen(app.get('port'), () => {
