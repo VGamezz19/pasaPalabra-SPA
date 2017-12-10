@@ -13,15 +13,16 @@ app.use(methodOverride());
 
 
 //================MONGODB==================//
+console.log(process.env)
 var portAPI = process.env.PORT || 3020;
-var mongoPort = process.env.PROD_MONGODB || 'mongodb://localhost/userPasaPalabra'
+var mongoPort = process.env.MONGODB_URI || 'mongodb://localhost/userPasaPalabra'
 
 mongoose.connect(mongoPort, (err, res)=> {
     useMongoClient: true;
     if(err) {
         console.log('ERROR: connecting to Database... --> ' + err);
     }else {
-        console.log ("Mongo Contectado ...")
+        console.log ("Mongo Contectado ..." + mongoPort)
         //==================API==================//
         //Por si acaso, primero contectamos el Servidor con MongoDB
 
