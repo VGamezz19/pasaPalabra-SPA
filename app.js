@@ -14,7 +14,7 @@ app.use(methodOverride());
 
 // ,"nodemon": "^1.12.5"
 //================MONGODB==================//
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8000));
 var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra' 
 
 mongoose.connect(mongoPort, (err, res)=> {
@@ -28,11 +28,11 @@ mongoose.connect(mongoPort, (err, res)=> {
         app.use(express.static(path.join(__dirname, 'public')))
         //app.use(express.static('./public'));
 
-        var router = express.Router();
-        router.get('/', (req, res) => {
+        //var router = express.Router();
+        app.get('/', (req, res) => {
             res.sendFile('public/pasa-palabra.html', { root: __dirname });
         });
-        app.use(router);
+       // app.use(router);
 
         app.listen(app.get('port'), () => {
             console.log(`you are listening at port ${app.get('port')}`);
