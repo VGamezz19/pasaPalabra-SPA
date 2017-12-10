@@ -14,19 +14,32 @@ app.use(methodOverride());
 
 
 //================MONGODB==================//
-//var mongoPort = process.env.MONGODB_URI || 'localhost/userPasaPalabra'
-
+var URI = process.env.MONGODB_URI || 'localhost/userPasaPalabra'
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-var connection = require('./env/' + process.env.NODE_ENV + '.js');
 var PORT = process.env.PORT || 5000
 var path = require('path')
 var engines = require('consolidate')
 
-console.log("entra", process.env.MONGODB_URI)
-console.log(connection)
-mongoose.connect(connection.db);
+var mongoose = require('mongoose');    
+mongoose.Promise = global.Promise
+mongoose.connect(URI);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 require('./models/user')
 require('./models/preguntas')
+
+// Since this is an example, we'll clean up after ourselves.
+mongoose.connection.db.collection('songs').drop(function (err) {
+if(err) throw err;
+    // Only close the connection when your app is terminating
+    mongoose.connection.db.close(function (err) {
+        if(err) throw err;
+    });
+});
+
+
+
 
 //==================API + Aplicacion==================//
 

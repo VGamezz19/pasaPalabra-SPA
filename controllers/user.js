@@ -3,16 +3,17 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt-nodejs');
 
 //GET - ALL USERS
-exports.allUsers = (req, res) => {
+exports.allUsers = (req, res,next) => {
 	//Find All User SORT DESC correctas
 	User.find({}).sort({correctas: -1}).exec( (err, users) => {
 		if(err) res.send(500, err.message);
 		res.status(200).jsonp(users);
+		next()
 	})
 };
 
 //GET - User by ID v
-exports.userByID  = (req, res)=> {
+exports.userByID  = (req, res,next)=> {
 	let params = req.body;
 	
 		let userNameCout = params.userName;
@@ -21,10 +22,12 @@ exports.userByID  = (req, res)=> {
 		User.findOne({ userName: userNameCout.toLowerCase() }, (err, user) => {
 			if (err) {
 				res.status(500).send({message: false})
+				next()
 			}else {
-				console.log("mongo -->", user);
+				next()
 				if (!user) {
 					res.send({ message:false})
+					next()
 				}else {              
 					// check if the password is the same of our database
 					bcrypt.compare(password, user.password, (err, check)=>{
@@ -33,12 +36,15 @@ exports.userByID  = (req, res)=> {
 							// if the param gethash is send in request we generate the token
 							if (params.gethash) {
 								res.status(200).send({ token: jwt.createToken(user) });
+								next()
 							}else {
 								// if the gethash is not set we return a user information
 								res.status(200).send({ user });
+								next()
 							}
 						}else { // If password not match
 							res.send({message: false});
+							next()
 						}
 					});
 				}
@@ -47,7 +53,7 @@ exports.userByID  = (req, res)=> {
 };
 
 //POST - Inser New User
-exports.userInsert = (req, res) =>{
+exports.userInsert = (req, res, next) =>{
 	let user = new User(); // instanciamos el objeto user con el modelo correspondiente
     
     let params = req.body; // recogemos todas las variables que nos lleguen por post
@@ -61,6 +67,7 @@ exports.userInsert = (req, res) =>{
 	User.findOne({ userName: user.userName }, (err, userMongo) => {
 			if (err) {
 				res.status(500).send({message: false})
+				next()
 			}else {
 				if (!userMongo) { //Si no encuentra Usuario... Insertar
 					if( params.password ) { //Con Contraseña.
@@ -70,11 +77,14 @@ exports.userInsert = (req, res) =>{
 								user.save( (err, userStored) => {
 									if (err) {
 										res.status(500).send({message: 'Request Error'});
+										next()
 									}else {
 										if ( !userStored ) {
 											res.status(404).send({message: 'The user is void'});
+											next()
 										}else {
 											res.status(200).send({ message: true });
+											next()
 										}
 									}
 								})
