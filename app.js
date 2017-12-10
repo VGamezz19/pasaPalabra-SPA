@@ -29,9 +29,9 @@ mongoose.connect(mongoPort, (err, res)=> {
         //app.use(express.static('./public'));
 
         //var router = express.Router();
-        app.get('/', (req, res) => {
-            res.sendFile('public/pasa-palabra.html', { root: __dirname });
-        });
+        // app.get('/', (req, res) => {
+        //     res.sendFile('public/pasa-palabra.html', { root: __dirname });
+        // });
        // app.use(router);
 
         app.listen(app.get('port'), () => {
