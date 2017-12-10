@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "API for PasaPalabra",
   "engines": {
-    "node": "6.9.4"
+    "node": "8.9.1"
   },
   "main": "app.js",
   "scripts": {
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "next build",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Victor Gamez",
