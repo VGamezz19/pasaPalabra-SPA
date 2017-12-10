@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API for PasaPalabra",
   "engines": {
-    "node": "8.9.1"
+    "node": "6.9.4"
   },
   "main": "app.js",
   "scripts": {
