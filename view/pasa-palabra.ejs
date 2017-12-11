@@ -68,10 +68,14 @@
                 <div class="text-content  col s12 m12 l12  container rigth-content z-depth-2" >
                     <!-- Welcome Template -->
                     <div id = 'content-text'>
-                        <h4> Bienbenidos a PasaPalabra!</h4>
+                        <h4> Bienvenidos a pasapalabra</h4>
                         <span>
-                                Text InfoText InfoText InfoText InfoText InfoText InfoText Info
-                                Text InfoText InfoText InfoText InfoText InfoText InfoText Info
+                                Para poder juegar a Pasapalabra, tienes que <b>Registrarte</b>. <br>
+                                Completa 25 preguntas correctamente en un limite de 150 segundos!<br> 
+                                Al finalizar el roscon, podras insertar tus puntuacionen el Ranking Mundial!<br>
+
+                                Solo los mejores conseguiran estar en el puesto 1 !
+                                
                         </span>
                         <div class="button">
                                 <button class="btn waves-effect boton-juega waves-light boton-juega blue-boton"
@@ -96,7 +100,7 @@
                                     type="submit"
                                     tabindex="5"
                                     href="#modal1"
-                                    name="action">Log In!
+                                    name="action">Sign Up
                                     <i class="material-icons prefix register-icon">add_circle</i> 
                                 </button>
                             </div>
@@ -115,7 +119,7 @@
                                     onclick="loginUsuario()"
                                     disabled
                                     tabindex="4"
-                                    name="action">Entrar 
+                                    name="action">Log In
                                     <i class="material-icons right">send</i>
                                 </button>
                         </div>
@@ -137,7 +141,7 @@
                                         <a  href="#modal-cerrarSesion"
                                             data-position="left" 
                                             data-delay="50" 
-                                            data-tooltip="Cerrar Sesion" 
+                                            data-tooltip="Sing Out" 
                                             class="btn-floating modal-trigger tooltipped waves-effect waves-light error ">
                                             <i class="material-icons">close</i>
                                         </a>
@@ -146,7 +150,7 @@
                                         <a  href="#modal-terminarPartida"
                                             data-position="bottom" 
                                             data-delay="50" 
-                                            data-tooltip="Volver a empezar"  
+                                            data-tooltip="Restart pasapalabra"  
                                             class="btn-floating waves-effect tooltipped waves-light modal-trigger blueC darken-1">
                                             <i class="material-icons">rotate_right</i>
                                         </a>
@@ -268,19 +272,19 @@
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">account_circle</i>
-                        <input type="text" tabindex="5" id="user-register" placeholder="nickName" class="">
+                        <input type="text" tabindex="5" id="user-register" placeholder="User Name" class="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">https</i>    
-                        <input tabindex="5" id="user-pass" placeholder="Contraseña" type="password" class="">
+                        <input tabindex="5" id="user-pass" placeholder="Password" type="password" class="">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s8">
                         <i class="material-icons prefix">https</i>    
-                        <input tabindex="5" id="user-passTwo" placeholder="Repetir Contraseña" type="password" class="">
+                        <input tabindex="5" id="user-passTwo" placeholder="Password" type="password" class="">
                     </div>
                 </div>
             </div>
@@ -289,7 +293,7 @@
                     type="submit"
                     onclick="addUserNew()"
                     tabindex="6"
-                    name="action">Registrate! 
+                    name="action">Sign Up
                     <i class="material-icons right"></i>
                 </button>
             </div>
