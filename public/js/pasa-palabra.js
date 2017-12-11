@@ -143,7 +143,8 @@ function repetirPasaPalabra(element){
     startTime();  
     document.getElementById("puntos").innerHTML = 25;
     position = 0;
-    
+    document.getElementById('añadir-ranking').removeAttribute('disabled')
+
     document.getElementById("pregunta").innerHTML = questions[position].question
     document.getElementById('letter').innerHTML = questions[position].letter.toUpperCase();
     document.getElementById('a').className +=' seleccionada';
@@ -225,7 +226,6 @@ window.onload = () => {
     document.onkeypress = userAndPass;
     loaderHome()
     getAllPreguntas()
-    
  }
  //================= User and Pass =======================//
 function userAndPass() {
@@ -240,7 +240,6 @@ function userAndPass() {
 function addUserNew(){
     var user = ''
     var pass = ''
-
     if (document.getElementById("user-passTwo").value === document.getElementById("user-pass").value) {
        user = document.getElementById("user-register").value 
        pass = document.getElementById("user-pass").value
@@ -365,6 +364,8 @@ function updateUser () {
     xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
         if(this.readyState == 4 && this.status == 200) {
             getAllUser()
+            
+            document.getElementById('añadir-ranking').setAttribute('disabled','disabled')
             return true
         } else {
             return false
@@ -380,18 +381,9 @@ function getAllPreguntas() {
 
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log( JSON.parse(this.responseText))
-            // var xdxd = []
-            // var numero = 0
             questions = JSON.parse(this.responseText)
-            // console.log(xdxd )
-            // xdxd.forEach(element => {
-            //     console.log(element)
-            // });
-            addCirculo()
-            
+            addCirculo()       
         }
-
     };
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
