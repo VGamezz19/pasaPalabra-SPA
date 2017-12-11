@@ -14,7 +14,7 @@ app.use(methodOverride());
 
 
 //================MONGODB==================//
-var URI = 'mongodb://heroku_b1r92xqv:rhci47ihks9njo9jksagn777qf@ds149221.mlab.com:49221/heroku_b1r92xqv'//process.env.MONGODB_URI || 'localhost/userPasaPalabra'
+var URI = process.env.MONGODB_URI || 'localhost/userPasaPalabra' //'mongodb://heroku_b1r92xqv:rhci47ihks9njo9jksagn777qf@ds149221.mlab.com:49221/heroku_b1r92xqv'
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var PORT = process.env.PORT || 5000
 var path = require('path')
