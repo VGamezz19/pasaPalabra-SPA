@@ -8,7 +8,6 @@ exports.allUsers = (req, res,next) => {
 	User.find({}).sort({correctas: -1}).exec( (err, users) => {
 		if(err) res.send(500, err.message);
 		res.status(200).jsonp(users);
-		next()
 	})
 };
 
@@ -21,39 +20,32 @@ exports.userByID  = (req, res,next)=> {
 		console.log(params)
 		User.findOne({ userName: userNameCout.toLowerCase() }, (err, user) => {
 			if (err) {
-				res.status(500).send({message: false})
-				next()
+				return res.send(err);
 			}else {
-				next()
 				if (!user) {
 					res.send({ message:false})
-					next()
-				}else {              
-					// check if the password is the same of our database
+				} else {
 					bcrypt.compare(password, user.password, (err, check)=>{
 						// if the passwords is valid
 						if (check) {
 							// if the param gethash is send in request we generate the token
 							if (params.gethash) {
 								res.status(200).send({ token: jwt.createToken(user) });
-								next()
 							}else {
 								// if the gethash is not set we return a user information
 								res.status(200).send({ user });
-								next()
 							}
 						}else { // If password not match
 							res.send({message: false});
-							next()
 						}
-					});
+					})
 				}
 			}
 		})
 };
 
 //POST - Inser New User
-exports.userInsert = (req, res, next) =>{
+exports.userInsert = (req, res) =>{
 	let user = new User(); // instanciamos el objeto user con el modelo correspondiente
     
     let params = req.body; // recogemos todas las variables que nos lleguen por post
@@ -63,11 +55,11 @@ exports.userInsert = (req, res, next) =>{
 	user.incorrectas = params.incorrectas;
 	user.password = params.password
 	user.ultimaPartida = new Date().getTime();
-    user.role = 'role_user';
+	user.role = 'role_user';
 	User.findOne({ userName: user.userName }, (err, userMongo) => {
 			if (err) {
-				res.status(500).send({message: false})
-				next()
+				return res.status(500).send({message: false})
+
 			}else {
 				if (!userMongo) { //Si no encuentra Usuario... Insertar
 					if( params.password ) { //Con Contraseña.
@@ -76,15 +68,15 @@ exports.userInsert = (req, res, next) =>{
 							if( user.userName !== null) {
 								user.save( (err, userStored) => {
 									if (err) {
-										res.status(500).send({message: 'Request Error'});
-										next()
+										return res.status(500).send({message: 'Request Error'});
+										
 									}else {
 										if ( !userStored ) {
-											res.status(404).send({message: 'The user is void'});
-											next()
+											 return res.status(404).send({message: 'The user is void'});
+											
 										}else {
-											res.status(200).send({ message: true });
-											next()
+											  res.status(200).send({ message: true });
+											
 										}
 									}
 								})
@@ -92,7 +84,7 @@ exports.userInsert = (req, res, next) =>{
 						})
 					}
 				}else { // Si Encuentra Usuario... Error        
-					res.send({message:false})
+					return res.send({message:false})
 				}
 			}
 		})

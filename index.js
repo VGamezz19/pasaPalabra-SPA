@@ -14,14 +14,14 @@ app.use(methodOverride());
 
 
 //================MONGODB==================//
-var URI = 'mongodb://vgamez21:gordo3gordo2@ds135876.mlab.com:35876/heroku_4hnpjqbq?authSource=dbWithUserCredentials'//process.env.MONGODB_URI || 'localhost/userPasaPalabra'
+var URI = 'mongodb://heroku_b1r92xqv:rhci47ihks9njo9jksagn777qf@ds149221.mlab.com:49221/heroku_b1r92xqv'//process.env.MONGODB_URI || 'localhost/userPasaPalabra'
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var PORT = process.env.PORT || 5000
 var path = require('path')
 var engines = require('consolidate')
 var mongoose = require('mongoose');    
 console.log(URI)
-mongoose.Promise = global.Promise
+//mongoose.Promise = global.Promise
 mongoose.connect(URI)
 //mongoose.connect(URI+'?authMechanism=MONGODB-CR')
 //mongoose.connect(URI);
