@@ -12,6 +12,7 @@ var respons;
 var newuserError;
 var statusTime = false
 
+
 //===================GAME =============//
 //===================Start Game =============//
 function startGame(){
