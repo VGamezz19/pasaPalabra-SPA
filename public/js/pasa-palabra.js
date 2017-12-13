@@ -38,7 +38,6 @@ function startGame(){
            // console.log("Done", time)
             time === 0 ? check(true) : console.log()  
         } 
-           
     },1000)
 }
 //========================== Next Letra =======================//
@@ -46,13 +45,18 @@ function next(event){
     var letter = questions[position].letter;
     var status = questions[position].status;
     var respuesta = questions[position].answer;
+    var respuestaUser = ''
         if(event){
-            if(respuesta !== document.getElementById("respuesta").value.toLowerCase()) {
+            respuestaUser = document.getElementById("respuesta").value.toLowerCase();
+            respuestaUser = respuestaUser.replace(/\í/g, 'i').replace(/\á/g, 'a').replace(/\é/g, 'e').replace(/\ó/g, 'o').replace(/\ú/g, 'u')
+            if(respuesta !== respuestaUser) {
                 //Marcamos Error
                 document.getElementById(letter).className += " error";
                 toast('La Palabra Correcta Es <b>' + respuesta.charAt(0).toUpperCase() + respuesta.slice(1),'error_outline',4000)
                 //El status anterior
                 questions[position].status = 2;
+                document.getElementById("respuesta").value=''  
+                document.getElementById("respuesta").focus();  
             } else {
                 //Imprimimos puntos
                 puntos --;
@@ -62,10 +66,12 @@ function next(event){
                 //Modificar Status 1 == correcto
                 //El status anterior
                 questions[position].status = 1
+                document.getElementById("respuesta").value=''  
+                document.getElementById("respuesta").focus();  
             }
          } //PasaPalabra
          else if(!eventT){
-             document.getElementById("respuesta").focus();     
+            document.getElementById("respuesta").focus();     
          }
         //Buscar la proxima POSICION
         var BreakException = {}; 
@@ -218,7 +224,21 @@ function finTemplateGame(correctas, incorrectas) {
     document.getElementById('incorrectas-fin').innerHTML = incorrectas
     document.getElementById('date-fin').innerHTML = date
 }
-
+//================= Inputs auto Enter ==============//
+function inputRespuesta (event){
+    var code = event.which || event.keyCode;
+      if( code === 13 ) {
+        next(true);
+        return false; 
+      }
+}
+function inputUser (e){
+    var code = event.which || event.keyCode;
+      if( code === 13 ) {
+        loginUsuario();
+        return false; 
+      }
+}
 //================= Windows.onload ==============//
 //================== FIRST LOAD PAGE ============//
 window.onload = () => { 

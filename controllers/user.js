@@ -17,7 +17,6 @@ exports.userByID  = (req, res,next)=> {
 	
 		let userNameCout = params.userName;
 		let password = params.password;
-		console.log(params)
 		User.findOne({ userName: userNameCout.toLowerCase() }, (err, user) => {
 			if (err) {
 				return res.send(err);
@@ -94,7 +93,6 @@ exports.userInsert = (req, res) =>{
 //PUT - Update User
 exports.userUpdate = (req, res) => {
 	var user= req.body.userName.toLowerCase();
-	console.log(req.body)
 	User.findOne({ userName: user }, (err, userUpdate) => {
 
         userUpdate.correctas = req.body.correctas;

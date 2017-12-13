@@ -5,7 +5,6 @@ var Pregunta = require('../models/preguntas');
 exports.allQuestions = (req, res, next) => {
 
     Pregunta.find({}, function (err, preguntas) {
-            console.log(preguntas)
             if(err) {
             return next(err);
             } else {

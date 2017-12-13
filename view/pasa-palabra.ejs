@@ -92,7 +92,7 @@
                         <div class="row" style="margin-bottom: 0;">
                             <div id = 'input-user'class="input-field col s6">  
                                 <i class="material-icons prefix" id='icon-user-entrar'>account_circle</i>
-                                <input tabindex="2" id="insert-user" type="text" class="">
+                                <input tabindex="2" id="insert-user" type="text" onkeypress="inputUser(event)" class="">
                                 <label for="icon_prefix" id ='label-user'>User Name</label>
                             </div>
                             <div id = 'register'class="input-field col s6">
@@ -108,7 +108,7 @@
                         <div class="row">
                             <div id = 'input-pass'class="input-field col s6">
                                 <i class="material-icons prefix" id='icon-pass-entrar'>https</i>    
-                                <input tabindex="3" id="insert-pass" type="password" class="">
+                                <input tabindex="3" id="insert-pass" onkeypress="inputUser(event)" type="password" class="">
                                 <label for="icon_prefix" id='label-pass'>User password</label>
                             </div>
                         </div>
@@ -168,11 +168,11 @@
                             <div class="col s6 m6 l6">
                                 <div class="input-field">
                                     <i class="material-icons prefix" style="margin-top: 0.6em;">format_color_text</i> 
-                                    <input id="respuesta" type="text" class="">
+                                    <input id="respuesta" type="text" onkeypress="inputRespuesta(event)" class="">
                                 </div>
                             </div>
                             <div class="col s2 m2 l2">
-                                <button class="btn waves-effect waves-light botonRespuesta  enviar-boton col s12"
+                                <button type = 'button' class="btn waves-effect waves-light botonRespuesta  enviar-boton col s12"
                                     type="submit"
                                     onclick="next(true)"
                                     id ='enviar-respuesta'
