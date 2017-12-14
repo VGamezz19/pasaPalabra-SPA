@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt-nodejs');
 exports.allUsers = (req, res,next) => {
 	//Find All User SORT DESC correctas
 	User.find({}).sort({correctas: -1}).exec( (err, users) => {
-		if(err) res.send(500, err.message);
+		if(err) res.status(500).send(err.message);
 		res.status(200).jsonp(users);
 	})
 }
@@ -34,6 +34,7 @@ exports.userByID  = (req, res,next)=> {
 exports.userInsert = (req, res) =>{
 	let user = new User(), // instanciamos el objeto user con el modelo correspondiente
 		params = req.body; // recogemos todas las variables que nos lleguen por post
+		console.log(params)
     user.userName = params.userName.toLowerCase()
     user.correctas = params.correctas
 	user.incorrectas = params.incorrectas
@@ -42,15 +43,15 @@ exports.userInsert = (req, res) =>{
 	user.role = 'role_user'
 	User.findOne({ userName: user.userName }, (err, userMongo) => {
 		if (err) return res.status(500).send(500, err.message)
-		if (userMongo) return res.send(500, 'this user is already used')   
-		if (!params.password) return res.send(500, 'Mandatory password')   
-		if (!user.userName) return res.send(500, 'Mandatory nickName')
+		if (userMongo) return res.send({message: false, user: params.userName})   
+		if (!params.password) return res.status(500).send( 'Mandatory password')   
+		if (!user.userName) return res.status(500).send( 'Mandatory userName')
 
 		bcrypt.hash(params.password, null, null, function (err, hash) {
 			if(err) return res.send(500, err.message);
 			user.password = hash
 				user.save( (err, userStored) => {
-					if(err) return res.send(500, err.message)
+					if(err) return res.status(500).send( err.message)
 					if(!userStored) return res.status(404).send({message: 'The user is void'})
 
 					return res.status(200).send({ message: "Insert Succes!" })           

@@ -283,19 +283,19 @@ function logOff () {
 }
  //================= API FUNCTIONS ==============//
  //================= ALL USERS =================//
-function getAllUser() {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "api/user/";
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            usuarios = JSON.parse(this.responseText);
-            printRanking(usuarios)
-        }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-}
+ function getAllUser() {
+    fetch('api/user/')
+    .then(response => {
+      if (response.status === 200) { return response.json();} 
+      else { throw new Error('Something went wrong on api server!');}
+    })
+    .then(response => {
+        usuarios = response  
+        printRanking(usuarios)
+    }).catch(error => {
+      console.error(error);
+    })
+ }
 //===================== Inser new User ==========//
 function newUser (user,pass) {
     var xmlhttp = new XMLHttpRequest();
@@ -317,7 +317,7 @@ function newUser (user,pass) {
                 document.getElementById("user-passTwo").value = ''
                 document.getElementById("user-register").value = ''
 
-                toast('<span>El usuario ya <b>Existe!</b></span>','account_circle',4000)
+                toast('<span>El usuario '+newuserError.user+' ya <b>Existe!</b></span>','account_circle',4000)
                 document.getElementById('user-register').focus()    
             } else {
                 $('#modal1').modal('close');
@@ -391,16 +391,24 @@ function updateUser () {
 
 //=================== get All Preguntas ===============//
 function getAllPreguntas() {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "api/preguntas/";
-
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            questions = JSON.parse(this.responseText)
-            addCirculo()
-            loaderHome();       
-        }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-}
+    fetch('api/preguntas/')
+    .then(response => {
+      if (response.status === 200) { return response.json();} 
+      else { throw new Error('Something went wrong on api server!');}
+    })
+    .then(response => {
+         questions = response  
+         addCirculo()
+         loaderHome()
+    }).catch(error => {
+      console.error(error);
+    })
+ }
+ //FETCH
+// clone() - As the method implies this method creates a clone of the response.
+// redirect() - This method creates a new response but with a different URL.
+// arrayBuffer() - In here we return a promise that resolves with an ArrayBuffer.
+// formData() - Also returns a promise but one that resolves with FormData object.
+// blob() - This is one resolves with a Blob.
+// text() - In this case it resolves with a string.
+// json() - Lastly we have the method to that resolves the promise with JSON.
