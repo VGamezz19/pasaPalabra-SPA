@@ -3,16 +3,12 @@ var user = '';
 var password = ''
 var time = 150;
 var puntos = 25;
-var eventT = false;
 var position = 0;
 var statusCheck = false
 var count = 0;
 var usuarios;
 var respons;
 var newuserError;
-var statusTime = false
-
-
 //===================GAME =============//
 //===================Start Game =============//
 function startGame(){
@@ -31,14 +27,11 @@ function startGame(){
  } 
  //===================Start Time =============//
  function startTime(){
-    setTimeout(() => {
-        if(!statusTime){
-            time --;
-            document.getElementById("timer").innerHTML = time
-            time !== 0 ? startTime() : console.log()
-           // console.log("Done", time)
-            time === 0 ? check(true) : console.log()  
-        } 
+    setTimeout(() => { 
+            time --;   
+            if(time < 0){time=0; return false}
+            time !== 0 ? startTime() : check(true) 
+            document.getElementById("timer").innerHTML = time 
     },1000)
 }
 //========================== Next Letra =======================//
@@ -69,9 +62,9 @@ function next(event){
                 questions[position].status = 1
                 document.getElementById("respuesta").value=''  
                 document.getElementById("respuesta").focus();  
-            }
+            }     
          } //PasaPalabra
-         else if(!eventT){
+         else if(!event){
             document.getElementById("respuesta").focus();     
          }
         //Buscar la proxima POSICION
@@ -88,8 +81,6 @@ function next(event){
         } catch (e) {
             if (e !== BreakException) throw e;
         }
-
-        check(false);
         //Printar siguiente pregunta
         var question = questions[position].question;
         document.getElementById("pregunta").innerHTML = question
@@ -97,6 +88,8 @@ function next(event){
         document.getElementById(letter).classList.remove("seleccionada");
         document.getElementById(questions[position].letter).className +=' seleccionada';
         document.getElementById("respuesta").focus();
+
+        check(false);
  }
 //================== Fin de Roscon ==============//
 function check(event) {
@@ -119,7 +112,7 @@ function check(event) {
 function finGame(event){
     var correctas = 0
     var incorrectas = 0
-    statusTime = true
+    time = 0;
     if(event){
         questions.forEach(element => {
             element.status === 1 ? correctas++ : incorrectas ++;
@@ -143,12 +136,8 @@ function repetirPasaPalabra(element){
     document.getElementById('programa').style.display = 'none';
     document.getElementById('footer').style.display = 'none'
     document.getElementById('body').classList.remove('background');
-    loaderHome();
-    document.getElementById("timer").innerHTML = 153
-    time = 153;
-    statusTime = false
-    startTime();  
     document.getElementById("puntos").innerHTML = 25;
+    
     position = 0;
     document.getElementById('añadir-ranking').removeAttribute('disabled')
 
@@ -158,15 +147,22 @@ function repetirPasaPalabra(element){
     document.getElementById('game').style.display = 'inline'
     document.getElementById('fin-game').style.display = 'none'
 }
+function restartTime(){
+    time = 150;
+    document.getElementById("timer").innerHTML = 150
+}
 //================= TEMPLATES =====================//
 //================== Pintar Circulo ==============//
 function loaderHome(){
     setTimeout(()=>{
         document.getElementById('loaderHome').style.display = 'none';
         document.getElementById('programa').style.display = 'inline';
-        document.getElementById('body').className = 'background'
         document.getElementById('footer').style.display = 'inline'
-    },3000)
+        document.getElementById('body').className = 'background'
+        document.getElementById('body').style.display = 'inline'
+        document.getElementById('body').style.display = 'flex'
+        restartTime()
+    },2000)
 }
 function addCirculo(){
     var print =''
@@ -224,6 +220,7 @@ function finTemplateGame(correctas, incorrectas) {
     document.getElementById('correctas-fin').innerHTML = correctas
     document.getElementById('incorrectas-fin').innerHTML = incorrectas
     document.getElementById('date-fin').innerHTML = date
+    document.getElementById('letter').innerHTML = ''
 }
 //================= Inputs auto Enter ==============//
 function inputRespuesta (event){
@@ -333,7 +330,6 @@ function newUser (user,pass) {
     }
     xmlhttp.send(JSON.stringify({ userName: user, password: password, correctas : correctas, incorrectas : incorrectas}));
 }
-
 //====================== Log In User ==================//
 function logInUser (user,pass) {
     var xmlhttp = new XMLHttpRequest();
@@ -344,10 +340,8 @@ function logInUser (user,pass) {
     xmlhttp.open("POST", url , true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
-        console.log("ejecuta", this.status, this.readyState)
         if(this.readyState == 4 && this.status == 200) {
             respons = JSON.parse(this.responseText);
-            console.log(respons)
             if(respons.message === false){
                 document.getElementById('insert-user').value = ''
                 document.getElementById('insert-pass').value = ''
@@ -403,7 +397,8 @@ function getAllPreguntas() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             questions = JSON.parse(this.responseText)
-            addCirculo()       
+            addCirculo()
+            loaderHome();       
         }
     };
     xmlhttp.open("GET", url, true);

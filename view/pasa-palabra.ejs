@@ -244,10 +244,9 @@
                                 </button>
                             </div>
                             <div class="col s6 m6 l6">
-                                <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
+                                <button class="btn waves-effect waves-light modal-trigger botonRespuesta blue-boton col s12"
                                     type="submit"
-                                    id =''
-                                    onclick="repetirPasaPalabra()"
+                                    href="#modal-terminarPartida"
                                     name="action">Repetir Pasapalabra
                                     <i class="material-icons right">rotate_right</i>
                                 </button>
@@ -298,18 +297,17 @@
                 </button>
             </div>
         </div> 
-        <!-- Seguro que quiere terminar la partida? -->
+        <!-- Seguro que quieres repetir el pasa palabra? -->
         <div id="modal-terminarPartida" class="modal">
             <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
+                <h4>¿Quieres reiniciar el pasa palabra?</h4>
+                <p>Volveras a empezar de nuevo el pasa palabra. Se generaran un nuevo roscon con <b>preguntas aleatorias</b></p>
             </div>
             <div class="modal-footer">
                 <button class="btn waves-effect waves-light botonRespuesta blue-boton col s12"
                     type="submit"
-                    id =''
                     onclick="repetirPasaPalabra(true)"
-                    name="action">Repetir Pasapalabra
+                    name="action">Quiero repetirlo definitivamente
                     <i class="material-icons right">rotate_right</i>
                 </button>
             </div>
@@ -317,11 +315,11 @@
         <!-- Seguro que quieres Cerrar sesion?-->
         <div id="modal-cerrarSesion" class="modal">
             <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
+                <h4>Log Of</h4>
+                <p>¿Quieres cerrar sesion?</p>
             </div>
             <div class="modal-footer">
-                <a  onclick ='logOff()' class="waves-effect waves-green btn-flat">Agree</a>
+                <a  onclick ='logOff()' class="waves-effect waves-green btn-flat">Si</a>
             </div>
         </div>
     </div>
