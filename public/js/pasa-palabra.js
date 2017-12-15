@@ -130,7 +130,7 @@ function finGame(event){
 }
 //================== Repetir pasa palabra ==============//
 function repetirPasaPalabra(element){
-    getAllPreguntas();
+    getAllPreguntas()
     element === true ? $('#modal-terminarPartida').modal('close') : console.log();
     document.getElementById('loaderHome').style.display = 'inline';
     document.getElementById('programa').style.display = 'none';
@@ -164,9 +164,9 @@ function loaderHome(){
         restartTime()
     },2000)
 }
-function addCirculo(){
+function addCirculo(objeto){
     var print =''
-    questions.forEach(element => {
+    objeto.forEach(element => {
         print += "<li class='item' id= '"+element.letter+"'>"+element.letter.toUpperCase()+"</li>"
     });
     document.getElementById('ciculo').innerHTML = print;
@@ -242,7 +242,7 @@ function inputUser (e){
 window.onload = () => { 
     getAllUser()
     document.onkeypress = userAndPass;
-    loaderHome()
+    //loaderHome()
     getAllPreguntas()
  }
  //================= User and Pass =======================//
@@ -275,6 +275,8 @@ function addUserNew(){
 function loginUsuario(){
     user = document.getElementById('insert-user').value;
     password = document.getElementById('insert-pass').value;
+    document.getElementById("login").style.display = 'none'
+    document.getElementById('loader').style.display = 'inline-block'
     logInUser(user,password);   
 }
 //=================== Log Off ============= //
@@ -298,51 +300,65 @@ function logOff () {
  }
 //===================== Inser new User ==========//
 function newUser (user,pass) {
-    var xmlhttp = new XMLHttpRequest();
-    //var myArr;
-    var url = "api/user/";
-    var user = user;
-    var password = pass;
-    var correctas = 0;
-    var incorrectas = 0;
-    var ultimaPartida = new Date();
-
-    xmlhttp.open("POST", url , true);
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
-        if(this.readyState == 4 && this.status == 200) {
-            newuserError = JSON.parse(this.responseText)
-            if(newuserError.message === false){ //El usuario esta REPETIDO!
-                document.getElementById("user-pass").value = ''
-                document.getElementById("user-passTwo").value = ''
-                document.getElementById("user-register").value = ''
-
-                toast('<span>El usuario '+newuserError.user+' ya <b>Existe!</b></span>','account_circle',4000)
-                document.getElementById('user-register').focus()    
-            } else {
-                $('#modal1').modal('close');
-                document.getElementById('insert-user').focus()
-            }
-            return true
-        } else {
-            return false
-        }
+    var payload ={
+            userName: user, 
+            password: pass, 
+            correctas : 0, 
+            incorrectas : 0
     }
-    xmlhttp.send(JSON.stringify({ userName: user, password: password, correctas : correctas, incorrectas : incorrectas}));
+    var myHeaders = new Headers();  
+    myHeaders.append('Content-Type', 'application/json'); 
+    fetch('api/user/', {
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+    if (response.status === 200) { return response.json();} 
+    else { throw new Error('Something went wrong on api server!');}
+    })
+    .then(response => {
+    newuserError = response
+    if(newuserError.message === false){ //El usuario esta REPETIDO!
+        document.getElementById("user-pass").value = ''
+        document.getElementById("user-passTwo").value = ''
+        document.getElementById("user-register").value = ''
+
+        toast('<span>El usuario '+newuserError.user+' ya <b>Existe!</b></span>','account_circle',4000)
+        document.getElementById('user-register').focus()    
+    } else {
+        $('#modal1').modal('close');
+        document.getElementById('insert-user').focus()
+    }
+    }).catch(error => {console.error(error);})
 }
 //====================== Log In User ==================//
-function logInUser (user,pass) {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "api/user/login";
-    var user = user;
-    var password = pass;
-
-    xmlhttp.open("POST", url , true);
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
-        if(this.readyState == 4 && this.status == 200) {
-            respons = JSON.parse(this.responseText);
-            if(respons.message === false){
+    function logInUser (user,pass) {
+        var payload ={
+            userName: user, 
+            password: pass
+        }   
+    var myHeaders = new Headers();  
+    myHeaders.append('Content-Type', 'application/json'); 
+    fetch('api/user/login', {
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.status === 200) { return response.json();} 
+        else { throw new Error('Something went wrong on api server!');}
+    })
+    .then(response => {
+        respons = response
+        if(respons.message === false){
+            setTimeout(()=>{
+                document.getElementById("login").style.display = 'inline'
+                document.getElementById('loader').style.display = 'none'
                 document.getElementById('insert-user').value = ''
                 document.getElementById('insert-pass').value = ''
                 document.getElementById('label-user').classList.remove('active')
@@ -350,65 +366,52 @@ function logInUser (user,pass) {
     
                 toast('<span>Usuario o Contraseña <b>Incorrect@</b></span>','error_outline',4000)
                 document.getElementById('user-register').focus()
-            }else {
-                user = respons.user.userName;
-                //Ejecutamos Logica Game
-                document.getElementById("login").style.display = 'none'
-                document.getElementById('loader').style.display = 'inline-block'
-                //A los 3 se ejecuta el juego
-                startGame()
-            }
-            return true
-        } else {
-            respons = false
-            return false
+            },1000)  
+        }else {
+            user = respons.user.userName;
+            startGame()
         }
-    }
-    xmlhttp.send(JSON.stringify({ userName: user, password: password}));
+        return true
+    }).catch(error => {console.error(error)})
 }
-
 //=================== Update User ===============//
 function updateUser () {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "api/user/";
     var correctas = parseInt(document.getElementById('correctas-fin').innerText)
     var incorrectas = parseInt(document.getElementById('incorrectas-fin').innerText)
-
-    xmlhttp.open("PUT", url , true);
-    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.onreadystatechange = function() {//Call a function when the state changes.
-        if(this.readyState == 4 && this.status == 200) {
+    var payload= {
+        userName: user,
+        correctas: correctas,
+        incorrectas:incorrectas
+    }
+    var myHeaders = new Headers();  
+    myHeaders.append('Content-Type', 'application/json'); 
+    fetch('api/user/', {
+        method: 'PUT',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.status === 200) { 
             getAllUser()
-            
             document.getElementById('añadir-ranking').setAttribute('disabled','disabled')
             return true
-        } else {
-            return false
-        }
-    }
-    xmlhttp.send(JSON.stringify({ userName: user, correctas: correctas, incorrectas:incorrectas}));
+        } else { throw new Error('Something went wrong on api server!');}
+    })
+    .catch(error => {console.error(error)})
 }
-
 //=================== get All Preguntas ===============//
 function getAllPreguntas() {
     fetch('api/preguntas/')
     .then(response => {
-      if (response.status === 200) { return response.json();} 
+      if (response.status === 200) {return response.json();} 
       else { throw new Error('Something went wrong on api server!');}
-    })
-    .then(response => {
-         questions = response  
-         addCirculo()
+    }).then((res) => {
+         addCirculo(res)
          loaderHome()
+         questions = res;
     }).catch(error => {
       console.error(error);
     })
  }
- //FETCH
-// clone() - As the method implies this method creates a clone of the response.
-// redirect() - This method creates a new response but with a different URL.
-// arrayBuffer() - In here we return a promise that resolves with an ArrayBuffer.
-// formData() - Also returns a promise but one that resolves with FormData object.
-// blob() - This is one resolves with a Blob.
-// text() - In this case it resolves with a string.
-// json() - Lastly we have the method to that resolves the promise with JSON.

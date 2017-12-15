@@ -34,7 +34,7 @@ exports.userByID  = (req, res,next)=> {
 exports.userInsert = (req, res) =>{
 	let user = new User(), // instanciamos el objeto user con el modelo correspondiente
 		params = req.body; // recogemos todas las variables que nos lleguen por post
-		console.log(params)
+
     user.userName = params.userName.toLowerCase()
     user.correctas = params.correctas
 	user.incorrectas = params.incorrectas
