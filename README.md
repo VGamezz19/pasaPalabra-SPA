@@ -1,29 +1,12 @@
 
 
-# PasaPalabra
+#PasaPalabra
+
 Proyecto realizado en [Skylab CODERS][4]. 
 
 Tecnologias usadas **Back-End**: `Node` `Express` `EJS` `bcrypt-nodejs` `MongoDB` `nodemon` `API`
 
 Tecnologias usadas **Frond-End**: `javascript` `fech` (para las peticiones HTTP) `Materializecss`  (framework style)
-
-
-# Contenido
-
-  * [PasaPalabra](#PasaPalabra)
-    * [Visualización del proyecto](#Visualización-del-proyecto)
-    * [Dependencias necesarias](#Dependencias-necesarias)
-        * [Dependencias del proyecto - Package.json](#Dependencias-del-proyecto-Package.json)
-    * [Instalacion del proyecto](#Instalacion-del-proyecto)
-        * [scripts package.json](#scripts-package.json)
-    * [Estructura del proyecto](#Estructura-del-proyecto)
-        * [Carpetas importantes](#Carpetas-importantes)
-    * [Deploy Heroku](#Deploy-Heroku)
-        * [Start Heroku](#Start-Heroku)
-        * [MongoLab](#MongoLab)
-        * [Deploy APP](#Deploy-APP)
-        * [Open APP](#Open-APP)
-
 
 ## Visualización del proyecto
 
@@ -113,11 +96,9 @@ package.json
 
 `models`, donde especificaremos los modelos que `mongoose` ha de seguir (usuario y preguntas).
 
- `controllers`, los **metodos que realizara el servidor a nuestra BD** y que se usaran en el cliente (updates, inserts, finds).
+`controllers`, los **metodos que realizara el servidor a nuestra BD** y que se usaran en el cliente (updates, inserts, finds).
  
-  Y por ultimo `views`, Aqui guardamos el HTML que Node tendra que compilar (por eso esta en formato EJS)
-
-
+Y por ultimo `views`, Aqui guardamos el HTML que Node tendra que compilar (por eso esta en formato EJS)
 
 ## Deploy Heroku
 
@@ -133,6 +114,7 @@ Te pedira email y contraseña (los de heroku)
 -	`$ heroku create`
 
 Con estos dos comandos, crearas un repositorio `git` en el entorno Heroku
+
 >**Puedes** tener tu proyecto enlazado a GitHub y Heroku a la vez.
 
 ### MongoLab
