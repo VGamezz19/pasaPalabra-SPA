@@ -15,23 +15,23 @@ Necesitas tener [Node.js][1] (Recomiendo la v8.9.3), [MongoDB][2] Instalados en 
 
 Dependencias del proyecto - Package.json 
 >"dependencies": {
-
+>
 >    "bcrypt-nodejs": "0.0.3",
-
+>
 >  "body-parser": "^1.5.1",
-
+>
 >    "consolidate": "^0.15.0",
-
+>
 >    "ejs": "^2.5.6",
-
+>
  >   "express": "^4.15.2",
-
+>
   >  "method-override": "^2.1.2",
-
+>
    > "mongoose": "^4.13.6",
-
+>
   >  "mustache": "^2.3.0"
-
+>
   >}
   
 
@@ -57,13 +57,13 @@ Por ultimo, para ejecutar el proyecto. Abre tu `Terminal` y ejecuta el comando:
 Tambien puedes ejecutar el comando `node index.js`para ejecutar la aplicacion, pero no levantaras el [nodemon][3]
 
 >  "scripts": {
-
+>
 >  "server": "nodemon index.js",
-
+>
  > "start": "node index.js",
-
+>
  >"test": "echo \"Error: no test specified\" && exit 1"
-
+>
  > },
 
 Como podemos ver  en el `package.json`. En el apartado "scripts" estan definidos `server`(que ejecuta el **nodemon** como he comentado antes) y `start` (Heroku recomienda reservar el comando **start** para la ejecucion de la aplicacion en produccion. 
@@ -77,43 +77,43 @@ No tendras que configurar tu `MongoDB` para conectarlo al proyecto. Ya que por d
 ### Estructura del proyecto
 -------------
 >controller
-
+>
 >------preguntas.js
-
+>
 >------user.js
-
+>
 >models
-
+>
 >------preguntas.js
-
+>
 >------user.js
-
+>
 >public
-
+>
 >------img
-
+>
 >------js
-
+>
 >------------pasa-palabra.js
-
+>
 >------lib
-
+>
 >------------materializecss
-
+>
 >------------font-awesome
-
+>
 >------tyle
-
+>
 >------------pasa-palabra.css
-
+>
 >views
-
+>
 >------pasa-palabra.ejs
-
+>
 >index.js
-
+>
 >Procfile
-
+>
 >package.json
 
 Las carpetas más importantes con son: 
