@@ -1,3 +1,6 @@
+
+[TOC]
+
 # PasaPalabra
 Proyecto realizado en [Skylab CODERS][4]. 
 
@@ -5,15 +8,17 @@ Tecnologias usadas **Back-End**: `Node` `Express` `EJS` `bcrypt-nodejs` `MongoDB
 
 Tecnologias usadas **Frond-End**: `javascript` `fech` (para las peticiones HTTP) `Materializecss`  (framework style)
 
-### Visualización del proyecto
--------------
 
 
-### Dependencias necesarias
--------------
+## Visualización del proyecto
+
+
+
+## Dependencias necesarias
+
 Necesitas tener [Node.js][1] (Recomiendo la v8.9.3), [MongoDB][2] Instalados en tu ordenador para poder ejecutar esta aplicacion en tu Local.
 
-Dependencias del proyecto - Package.json 
+### Dependencias del proyecto - Package.json 
 ```
 "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -28,8 +33,8 @@ Dependencias del proyecto - Package.json
 ```
   
 
-### Instalacion del proyecto
--------------
+## Instalacion del proyecto
+
 Si quieres instalarte el proyecto y continuar añadiendo nuevas ideas. realiza un `git clone`
 
 
@@ -48,6 +53,7 @@ Por ultimo, para ejecutar el proyecto. Abre tu `Terminal` y ejecuta el comando:
 - `npm run server`
 
 Tambien puedes ejecutar el comando `node index.js`para ejecutar la aplicacion, pero no levantaras el [nodemon][3]
+### scripts package.json
 ```
 "scripts": {
     "server": "nodemon index.js",
@@ -88,7 +94,7 @@ Procfile
 package.json
 ```
 
-Las carpetas más importantes con son: 
+### Carpetas importantes
 
 `models`, donde especificaremos los modelos que `mongoose` ha de seguir (usuario y preguntas).
 
@@ -96,10 +102,44 @@ Las carpetas más importantes con son:
  
   Y por ultimo `views`, Aqui guardamos el HTML que Node tendra que compilar (por eso esta en formato EJS)
 
-[1]: https://nodejs.org/es/
-[2]: https://docs.mongodb.com/manual/installation/
-[3]: https://nodemon.io/
-[4]:http://www.skylabcoders.com/es
 
-### Deploy Heroku
--------------
+
+## Deploy Heroku
+
+### Start Heroku
+
+Antes de nada, necesitas [instalarte Heroku][5] en tu ordenador. También tendrás que iniciar sesión en la plataforma.
+Despues, abre tu `terminal`y sigue estos sencillos comandos:
+
+-	`$ heroku login`
+
+Te pedira email y contraseña (los de heroku)
+
+-	`$ heroku create`
+
+Con estos dos comandos, crearas un repositorio `git` en el entorno Heroku
+>**Puedes** tener tu proyecto enlazado a GitHub y Heroku a la vez.
+
+### MongoLab
+
+ - `$ heroku addons:create mongolab:sandbox`
+
+Crearemos un `MongoLab` para el proyecto. No tendremos la necesidad de modificar nada de nuetro proyecto, ya que **Heroku crea un Varaible de entorno** llamada `MONGODB_URI` donde esta la información de conexión de MongoLab.
+
+Por eso nos referiremos  a la **conexión** de MongoDB en nuestro codigo de esta forma:
+
+`URI=process.env.MONGODB_URI||'mongodb://localhost/userPasaPalabra',`
+
+### Deploy APP
+- `$ git add .`
+
+- `$ git commit -m "first commit"`
+
+- `$ git push heroku master`
+
+Al ejecutar el ultimo comando mencionado, Subiremos nuestra aplicación a producción.
+
+### Open APP
+- `$ Heroku open`
+
+Nos abrira automaticamente una pestaña de `Chrome` con la aplicación subida! 
