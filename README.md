@@ -48,17 +48,13 @@ Por ultimo, para ejecutar el proyecto. Abre tu `Terminal` y ejecuta el comando:
 - `npm run server`
 
 Tambien puedes ejecutar el comando `node index.js`para ejecutar la aplicacion, pero no levantaras el [nodemon][3]
-
->  "scripts": {
->
->  "server": "nodemon index.js",
->
- > "start": "node index.js",
->
- >"test": "echo \"Error: no test specified\" && exit 1"
->
- > },
-
+```
+"scripts": {
+    "server": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
 Como podemos ver  en el `package.json`. En el apartado "scripts" estan definidos `server`(que ejecuta el **nodemon** como he comentado antes) y `start` (Heroku recomienda reservar el comando **start** para la ejecucion de la aplicacion en produccion. 
 
 Por defecto Node arrancara la aplicación en el puerto :5000 a no ser que previamente hayamos definido un puerto en nuestro Node 
@@ -67,47 +63,30 @@ Por defecto Node arrancara la aplicación en el puerto :5000 a no ser que previa
 
 No tendras que configurar tu `MongoDB` para conectarlo al proyecto. Ya que por defecto utiliza la conexión `mongodb://localhost/{nombre DB}`
 
-### Estructura del proyecto
--------------
->controller
->
->------preguntas.js
->
->------user.js
->
->models
->
->------preguntas.js
->
->------user.js
->
->public
->
->------img
->
->------js
->
->------------pasa-palabra.js
->
->------lib
->
->------------materializecss
->
->------------font-awesome
->
->------tyle
->
->------------pasa-palabra.css
->
->views
->
->------pasa-palabra.ejs
->
->index.js
->
->Procfile
->
->package.json
+## Estructura del proyecto
+
+```
+controller
+------preguntas.js
+------user.js
+models
+------preguntas.js
+------user.js
+public
+------img
+------js
+------------pasa-palabra.js
+------lib
+------------materializecss
+------------font-awesome
+------tyle
+------------pasa-palabra.css
+views
+------pasa-palabra.ejs
+index.js
+Procfile
+package.json
+```
 
 Las carpetas más importantes con son: 
 
