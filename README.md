@@ -1,5 +1,4 @@
 
-[TOC]
 
 # PasaPalabra
 Proyecto realizado en [Skylab CODERS][4]. 
@@ -8,6 +7,22 @@ Tecnologias usadas **Back-End**: `Node` `Express` `EJS` `bcrypt-nodejs` `MongoDB
 
 Tecnologias usadas **Frond-End**: `javascript` `fech` (para las peticiones HTTP) `Materializecss`  (framework style)
 
+
+# Contenido
+
+  * [PasaPalabra](#PasaPalabra)
+    * [Visualización del proyecto](#Visualización del proyecto)
+    * [Dependencias necesarias](#Dependencias necesarias)
+        * [Dependencias del proyecto - Package.json](#Dependencias del proyecto - Package.json)
+    * [Instalacion del proyecto](#Instalacion del proyecto)
+        * [scripts package.json](#scripts package.json)
+    * [Estructura del proyecto](#Estructura del proyecto)
+        * [Carpetas importantes](#Carpetas importantes)
+    * [Deploy Heroku](#Deploy Heroku)
+        * [Start Heroku](#Start Heroku)
+        * [MongoLab](#MongoLab)
+        * [Deploy APP](#Deploy APP)
+        * [Open APP](#Open APP)
 
 
 ## Visualización del proyecto
