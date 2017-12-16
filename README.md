@@ -14,25 +14,18 @@ Tecnologias usadas **Frond-End**: `javascript` `fech` (para las peticiones HTTP)
 Necesitas tener [Node.js][1] (Recomiendo la v8.9.3), [MongoDB][2] Instalados en tu ordenador para poder ejecutar esta aplicacion en tu Local.
 
 Dependencias del proyecto - Package.json 
->"dependencies": {
->
->    "bcrypt-nodejs": "0.0.3",
->
->  "body-parser": "^1.5.1",
->
->    "consolidate": "^0.15.0",
->
->    "ejs": "^2.5.6",
->
- >   "express": "^4.15.2",
->
-  >  "method-override": "^2.1.2",
->
-   > "mongoose": "^4.13.6",
->
-  >  "mustache": "^2.3.0"
->
-  >}
+```
+"dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.5.1",
+    "consolidate": "^0.15.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "method-override": "^2.1.2",
+    "mongoose": "^4.13.6",
+    "mustache": "^2.3.0"
+  }
+```
   
 
 ### Instalacion del proyecto
