@@ -1,6 +1,6 @@
 
 
-#PasaPalabra
+# PasaPalabra
 
 Proyecto realizado en [Skylab CODERS][4]. 
 
@@ -10,7 +10,7 @@ Tecnologias usadas **Frond-End**: `javascript` `fech` (para las peticiones HTTP)
 
 ## Visualización del proyecto
 
-
+![alt text](/public/img/github/pasa-palabra.png)
 
 ## Dependencias necesarias
 
@@ -44,7 +44,7 @@ Despues,  abre tu `Terminal` y accede a la carpeta del proyecto `cd skylabPasaPa
 
 Proximamente, tendras que importar el fichero `preguntas.json` que se te abra descargado en tu proyecto `/skylabPasaPalabra` a tu MongoDB. Para que la aplicacion tenga los datos necesarios. Ejecuta este comando en la raíz del proyecto: 
 
-- `mongoexport localhost:27017  --collection pasapalabras --db userpasapalabra --out preguntas.json `
+- `mongoimport --host localhost --port 27017 --db userPasaPalabras --collection preguntaspasapalabras --type json --file "preguntas.json" --drop --stopOnError`
 
 Por ultimo, para ejecutar el proyecto. Abre tu `Terminal` y ejecuta el comando: 
 
@@ -139,4 +139,11 @@ Al ejecutar el ultimo comando mencionado, Subiremos nuestra aplicación a produc
 ### Open APP
 - `$ Heroku open`
 
-Nos abrira automaticamente una pestaña de `Chrome` con la aplicación subida! 
+Heroku nos abrira automaticamente una pestaña de `Chrome` con la aplicación subida! 
+
+
+[1]: https://nodejs.org/es/
+[2]: https://docs.mongodb.com/manual/installation/
+[3]: https://nodemon.io/
+[4]: http://www.skylabcoders.com/es
+[5]: https://devcenter.heroku.com/articles/heroku-cli
