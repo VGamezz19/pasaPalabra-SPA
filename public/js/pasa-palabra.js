@@ -18,6 +18,7 @@ function startGame(){
         //Insertamos Letra Game
         document.getElementById('letter').innerHTML = 'A';
         document.getElementById('a').className +=' seleccionada';
+        document.getElementById('pregunta').innerHTML = questions[position].question
         //printUser
         document.getElementById('userName').innerHTML = user
         startTime();
@@ -130,6 +131,7 @@ function finGame(event){
 }
 //================== Repetir pasa palabra ==============//
 function repetirPasaPalabra(element){
+    
     getAllPreguntas()
     element === true ? $('#modal-terminarPartida').modal('close') : console.log();
     document.getElementById('loaderHome').style.display = 'inline';
@@ -148,7 +150,12 @@ function repetirPasaPalabra(element){
     document.getElementById('fin-game').style.display = 'none'
 }
 function restartTime(){
-    time = 150;
+    if (time === 0) {
+        time = 150
+        startTime()
+    } else {
+        time = 150;
+    }
     document.getElementById("timer").innerHTML = 150
 }
 //================= TEMPLATES =====================//

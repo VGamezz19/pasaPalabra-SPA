@@ -70,6 +70,6 @@
 {"_id":{"$oid":"5a3221295d4ebdac299cdfdc"},"letter":"b","answer":"bisilaba","status":0,"question":"CON LA B. Palabra que tiene dos sílabas."}
 {"_id":{"$oid":"5a3221295d4ebdac299cdfde"},"letter":"b","answer":"beautiful","status":0,"question":"CON LA B. Bonita in english is… "}
 {"_id":{"$oid":"5a3221375d4ebdac299cdfea"},"letter":"a","answer":"antonimo","status":0,"question":"CON LA A. Palabra que significa lo contrario de una dada."}
-{"_id":{"$oid":"5a3221375d4ebdac299cdfec"},"letter":"a","answer":"acepcion","status":0,"question":"Cada uno de los significados que tiene una palabra."}
+{"_id":{"$oid":"5a3221375d4ebdac299cdfec"},"letter":"a","answer":"acepcion","status":0,"question":"CON LA A. Cada uno de los significados que tiene una palabra."}
 {"_id":{"$oid":"5a324e3d5d4ebdac299ce190"},"letter":"g","answer":"genero","status":0,"question":"CON LA G. Lo que nos indica si es masculino o femenino es el…"}
 {"_id":{"$oid":"5a324e3d5d4ebdac299ce192"},"letter":"g","answer":"grave","status":0,"question":"CON LA G. Antónimo de leve."}
