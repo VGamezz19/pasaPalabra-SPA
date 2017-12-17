@@ -143,8 +143,7 @@ function repetirPasaPalabra(element){
     position = 0;
     document.getElementById('añadir-ranking').removeAttribute('disabled')
 
-    document.getElementById("pregunta").innerHTML = questions[position].question
-    document.getElementById('letter').innerHTML = questions[position].letter.toUpperCase();
+    document.getElementById('letter').innerHTML = 'A'
     document.getElementById('a').className +=' seleccionada';
     document.getElementById('game').style.display = 'inline'
     document.getElementById('fin-game').style.display = 'none'
@@ -418,7 +417,8 @@ function getAllPreguntas() {
          addCirculo(res)
          loaderHome()
          questions = res;
-         console.log(res)
+         document.getElementById("pregunta").innerHTML = questions[position].question
+         console.log(questions)
     }).catch(error => {
       console.error(error);
     })
