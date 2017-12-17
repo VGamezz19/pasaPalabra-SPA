@@ -418,6 +418,7 @@ function getAllPreguntas() {
          addCirculo(res)
          loaderHome()
          questions = res;
+         console.log(res)
     }).catch(error => {
       console.error(error);
     })
