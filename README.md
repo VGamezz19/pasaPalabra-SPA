@@ -83,7 +83,7 @@ public
 ------lib
 ------------materializecss
 ------------font-awesome
-------tyle
+------style
 ------------pasa-palabra.css
 views
 ------pasa-palabra.ejs
